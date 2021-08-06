@@ -4,7 +4,8 @@
     <h1 class="mt-2 mt-md-4 mb-3 pt-5">Clientes</h1>
     <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
       <p class="text-muted">Este módulo lista todos los clientes de la tienda.</p>
-      <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" href="https://getbootstrap.com/docs/4.5/components/forms/" target="_blank" rel="noopener">Registrar nuevo<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+      <p class="font-size-sm font-weight-medium pl-md-4">
+        <a class="text-nowrap"  [routerLink]="['/panel/clientes/registro']"   >Registrar nuevo<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
     </div>
   </div>
 
@@ -39,7 +40,7 @@
                       <th>Opciones</th>
                     </tr>
                   </thead>
-                  <tbody  *ngFor="let item of clientes; let indice = index">
+                  <tbody  *ngFor="let item of clientes | slice: ( page-1 ) * pageSize : ( page -1 ) * pageSize + pageSize; let indice = index">
                     <tr>
                         <td>{{indice + 1 }}</td>
                         <td>{{item.nombres}}</td>
@@ -66,36 +67,10 @@
             </div>
         </div>
         <div class="card-footer">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a href="#" class="page-link">Prev</a>
-                  </li>
-                  <li class="page-item d-sm-none">
-                    <span class="page-link page-link-static">2 / 5</span>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a href="#" class="page-link">1</a>
-                  </li>
-                  <li class="page-item active d-none d-sm-block" aria-current="page">
-                    <span class="page-link">
-                      2
-                      <span class="sr-only">(current)</span>
-                    </span>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a href="#" class="page-link">3</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a href="#" class="page-link">4</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a href="#" class="page-link">5</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">Next</a>
-                  </li>
-                </ul>
-              </nav>
+          <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize" 
+              [collectionSize]="clientes.length" >
+          </ngb-pagination>
         </div>
   </div>    

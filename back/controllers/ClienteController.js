@@ -75,34 +75,65 @@ const login_cliente = async function(req,res){
 
 
 const listar_clientes_filtro_admin = async function( req,res){
-
-    let tipo = req.params['tipo'] ;
-    let filtro = req.params['filtro'];
-
-    console.log(tipo);
-
-    if (tipo == null || tipo == 'null') {
-        
-        let reg = await Cliente.find();
-        res.status(200).send({data:reg});
-    } else {
-        if (tipo == 'apellidos') {
-            let reg = await Cliente.find({apellidos:new RegExp(filtro,'i')});
+    console.log(req.user);
+ if (req.user) {
+     if (req.user.role == 'admin') {
+        let tipo = req.params['tipo'] ;
+        let filtro = req.params['filtro'];
+    
+        console.log(tipo);
+    
+        if (tipo == null || tipo == 'null') {
+            
+            let reg = await Cliente.find();
             res.status(200).send({data:reg});
-        }else if (tipo == 'correo') {
-            let reg = await Cliente.find({email:new RegExp(filtro,'i')});
-            res.status(200).send({data:reg});
+        } else {
+            if (tipo == 'apellidos') {
+                let reg = await Cliente.find({apellidos:new RegExp(filtro,'i')});
+                res.status(200).send({data:reg});
+            }else if (tipo == 'correo') {
+                let reg = await Cliente.find({email:new RegExp(filtro,'i')});
+                res.status(200).send({data:reg});
+            }
         }
-    }
+     }else{
+        res.status(500).send({message:'NoAccess'});
+     }
+ }else{
+    res.status(500).send({message:'NoAccess'});
+ }
+
 
 }
 
 
-    
+
+
+const registro_cliente_admin = async function(req,res){
+    if (req.user) {
+        if (req.user.role == 'admin') {
+            var data = req.body;
+
+            bcrypt.hash('123456789',null,null, async function(err, hash){
+                if (hash) {
+                    data.password = hash;
+                    let reg = await Cliente.create(data);
+                     res.status(200).send({data:reg});
+                }else{
+                    res.status(200).send({message:'Hubo un error en el servidor',data:undefined});
+                }
+            });
+
+            
+
+        }
+    }
+}
 
 
 module.exports = {
     registro_cliente,
     login_cliente,
-    listar_clientes_filtro_admin
+    listar_clientes_filtro_admin,
+    registro_cliente_admin
 }
