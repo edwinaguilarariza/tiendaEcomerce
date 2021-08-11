@@ -34,7 +34,7 @@ export class AdminService {
       try {
         const helper = new JwtHelperService();
         var decodedToken = helper.decodeToken(token);
-        console.log(decodedToken);
+       
         if (!decodedToken) {
           console.log('No acceso');
           localStorage.removeItem('token');

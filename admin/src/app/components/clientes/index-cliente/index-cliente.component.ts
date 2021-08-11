@@ -71,13 +71,29 @@ export class IndexClienteComponent implements OnInit {
         this.init_data();
       }
     }
+  }
+
+
+  eliminar(id: any){
+    this._clienteService.eliminar_cliente_admin(id,this.token).subscribe(
+      response =>{
+        console.log(response);
+      },
+      error =>{
+        console.log(error);
+      })
+    }
+   
 
   }
+  
+
+    
+
     
   
 
 
   
 
-}
 

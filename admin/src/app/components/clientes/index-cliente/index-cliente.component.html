@@ -48,16 +48,35 @@
                         <td>{{item.email}}</td>
                         <td>
                           
-                          <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <div class="btn-group dropdown d-inline-block mb-3 mr-2">
+                            <button class="btn btn-outline-secondary  btn-sm  dropdown-toggle" type="button"  data-toggle="dropdown" aria-expanded="true">
                               Opciones
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item" href="#">Editar cliente</a></li>
-                              <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
+                            <div class="dropdown-menu" >
+                               <a class="dropdown-item" [routerLink]="['/panel/clientes',item._id]">Editar cliente</a>
+                                <a class="dropdown-item" style="cursor: pointer;"  data-toggle="modal"  [attr.data-target]="'#delete-'+item._id" >Eliminar cliente</a>
+                            </div>
+                          </div>
                               
                               
-                            </ul>
+                              
+
+                          <div class="modal fade" id="delete-{{item._id }}" tabindex="-1" style="display: none;" aria-hidden="true">    
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Eliminar, {{item.nombres}} {{item.apellidos}} </h4>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="fs-sm">Desea eliminar este cliente?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Cancelar</button>
+                                  <button class="btn btn-primary btn-sm"  (click)="eliminar(item._id)" type="button">Si, eliminar</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
 
                         </td>
