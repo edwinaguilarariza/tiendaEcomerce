@@ -1,4 +1,4 @@
-'use stritc'
+'use strict'
 
 var express = require('express');
 var clienteController = require('../controllers/ClienteController');

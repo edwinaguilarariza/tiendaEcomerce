@@ -60,7 +60,7 @@ const login_admin = async function(req,res){
                 
             } 
            
-        }
+}
            
 
 

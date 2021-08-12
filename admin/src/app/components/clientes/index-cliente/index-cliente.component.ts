@@ -39,11 +39,7 @@ export class IndexClienteComponent implements OnInit {
       response=>{
         this.clientes = response.data;
         this.load_data = false;
-        /* 
-        setTimeout(() => {
-        },1000); */
-          
-      //console.log(this.clientes);
+      
     },
     error=>{
       console.log(error);
