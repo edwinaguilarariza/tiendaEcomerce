@@ -14,7 +14,7 @@ var ProductoSchema = Schema({
     stock: {type: Number,required:true },
     nventas: {type: Number, default:0, required:true },
     npuntos: {type: Number, default:0, required:true },
-    categoria: {type: Number,required:true },
+    categoria: {type: String,required:true },
     estado: {type: String,default:'Edicion',required: true },
     createdAt:{ type:Date,default: Date.now, required: true }
 });

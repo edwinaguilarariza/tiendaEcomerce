@@ -66,7 +66,7 @@ public token;
 
 
   fileChangeEvent(event:any):void{
-    let file;
+    var file;
     if (event.target.files && event.target.files[0]) {
       file = <any>event.target.files[0]; 
       //console.log(file);
