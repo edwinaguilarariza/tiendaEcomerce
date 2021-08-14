@@ -14,7 +14,7 @@ const registro_producto_admin = async function(req,res){
           var name = img_path.split('\\');
           var portada_name = name[2];
 
-          data.slug = data.titulo.toLowerCase().replace(/ /g,'-').replace(/[*\w-]+/g,'');  
+          data.slug = data.titulo.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
           data.portada = portada_name;
           let reg = await Producto.create(data);
           res.status(200).send({data:reg});

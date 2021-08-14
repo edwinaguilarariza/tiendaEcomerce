@@ -14,7 +14,7 @@ var producto_route = require('./routes/producto');
 
 mongoose.connect
 ("mongodb://127.0.0.1:27017/tiendaEcomerce",
-{ useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true },(err,res) => {
+{ useUnifiedTopology: true, useNewUrlParser: true },(err,res) => {
     if(err){
         console.log(err);
     }else{
@@ -26,7 +26,7 @@ mongoose.connect
 })
 
 app.use(bodyparser.urlencoded({extended:true}));
-app.use(bodyparser.json({  extended:true}));
+app.use(bodyparser.json({limit:'50mb',  extended:true}));
 
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Origin','*'); 
