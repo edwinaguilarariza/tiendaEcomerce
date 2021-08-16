@@ -12,7 +12,7 @@
   <form  #registroForm="ngForm" (ngSubmit)="registro(registroForm)" >
     <div class="card box-shadow-sm">
         <div class="card-header">
-            <h5 style="margin-bottom: 0px;">Registro de producto</h5>
+            <h5 style="margin-bottom: 0px;">Registro de producto</h5> 
         </div>
         <div class="card-body">
               <div class="row">
@@ -68,8 +68,12 @@
               </div>
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary mr-3" type="submit">Crear producto</button>
-            <a class="btn btn-warning">Regresar</a>
+            <button  *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Crear producto</button>
+            <button  *ngIf="load_btn" type="button" class="btn btn-secondary" disabled>
+              <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                Creando...
+            </button>
+            <a class="btn btn-warning" [routerLink]="['/panel/productos']" routerLinkActive="router-link-active" >Regresar</a>
         </div>
   </div>    
 
