@@ -33,7 +33,7 @@ public load_data = true;
        
        this._clienteService.obtener_cliente_admin(this.id,this.token).subscribe(
          response => {
-          console.log(response);
+         // console.log(response);
           if (response.data == undefined) {
             this.cliente =undefined;
             this.load_data = false;

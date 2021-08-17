@@ -36,4 +36,31 @@ export class ProductoService {
     return this._http.get(this.url+'listar_productos_admin/'+filtro,{headers:headers} );
  }
 
+ obtener_producto_admin( id: any, token: any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+  return this._http.get(this.url+'obtener_producto_admin/'+id,{headers:headers} );
+}
+
+actualizar_producto_admin( data: any , id: any , token: any):Observable<any>{
+  if (data.portada) {
+    let headers = new HttpHeaders({'Authorization':token });
+
+    const fd  = new FormData();
+
+    fd.append('titulo',data.titulo);
+    fd.append('stock',data.stock);
+    fd.append('precio',data.precio);
+    fd.append('descripcion',data.descripcion);
+    fd.append('contenido',data.contenido);
+    fd.append('categoria',data.categoria);
+    fd.append('portada',data.portada);
+
+    return this._http.put(this.url+'actualizar_producto_admin/'+id,fd,{headers:headers} );
+  } else {
+    let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+    return this._http.put(this.url+'actualizar_producto_admin/'+id,data,{headers:headers} );
+  }
+}
+
+
   }  
