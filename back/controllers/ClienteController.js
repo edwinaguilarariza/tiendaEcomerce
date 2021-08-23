@@ -198,7 +198,7 @@ const eliminar_cliente_admin = async function(req,res){
 } 
 
 
-
+ 
 module.exports = {
     registro_cliente,
     login_cliente,
