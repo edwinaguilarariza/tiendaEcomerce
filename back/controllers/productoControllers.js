@@ -25,7 +25,7 @@ const registro_producto_admin = async function(req,res){
           let inventario = await Inventario.create({
               admin: req.user.sub,
               cantidad: data.stock,
-              provedor:'Primer registro',
+              proveedor:'Primer registro',
               producto: reg._id
           }) 
 
@@ -165,12 +165,12 @@ const eliminar_producto_admin = async function(req,res){
     }
 } 
 
-const listar_inventario_producto_admin = async function(req,res){
+const listar_inventario_producto_admin = async function(req,res){ 
     if (req.user) {
         if (req.user.role == 'admin' ) {
             var id = req.params['id'];
 
-            var reg = await Inventario.find({producto: id});
+            var reg = await Inventario.find({producto: id}).populate('admin');
             
             res.status(200).send({data:reg});
             
@@ -180,7 +180,52 @@ const listar_inventario_producto_admin = async function(req,res){
     }else{
         res.status(500).send({message:'NoAccess'});
     }
+
 }
+
+const eliminar_inventario_producto_admin = async function(req,res){ 
+    if (req.user) {
+        if (req.user.role == 'admin' ) {
+            //obtener el id del inventario
+            var id = req.params['id'];
+            //eliminar el inventario
+            let reg = await Inventario.findByIdAndRemove({_id:id});
+            //obtener el registro del producto
+            let prod = await Producto.findById({_id:reg.producto});
+            //calcular el nuevo stock
+            let nuevo_stock = parseInt(prod.stock) - parseInt(reg.cantidad);
+            //actualizar el nuevo stock al producto
+            let producto = await Producto.findByIdAndUpdate({_id:reg.producto},{
+                stock: nuevo_stock
+            });
+
+            res.status(200).send({data:producto});
+            
+        }else{
+            res.status(500).send({message:'NoAccess'});
+        }
+    }else{
+        res.status(500).send({message:'NoAccess'});
+    }
+
+}
+
+const registro_inventario_producto_admin = async function(req,res){ 
+    if (req.user) {
+        if (req.user.role == 'admin' ) {
+            let data = req.body;
+            let reg = await Inventario.create(data);
+            res.status(200).send({data:reg});
+
+        }else{
+            res.status(500).send({message:'NoAccess'});
+        }
+    }else{
+        res.status(500).send({message:'NoAccess'});
+    }
+
+}
+
 
 
 module.exports = {
@@ -190,5 +235,7 @@ module.exports = {
     obtener_producto_admin,
     actualizar_producto_admin,
     eliminar_producto_admin,
-    listar_inventario_producto_admin 
+    listar_inventario_producto_admin,
+    eliminar_inventario_producto_admin,
+    registro_inventario_producto_admin
 }

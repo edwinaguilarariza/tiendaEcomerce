@@ -19,8 +19,8 @@ api.delete('/eliminar_producto_admin/:id',auth.auth,productoController.eliminar_
 
 //invetario
 api.get('/listar_inventario_producto_admin/:id' ,auth.auth,productoController.listar_inventario_producto_admin );
-
-
+api.delete('/eliminar_inventario_producto_admin/:id',auth.auth,productoController.eliminar_inventario_producto_admin);
+api.post('/registro_inventario_producto_admin',auth.auth,productoController.registro_inventario_producto_admin);
 
 module.exports = api;
 

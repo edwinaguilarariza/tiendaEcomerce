@@ -9,13 +9,36 @@
     </div>
   </div>
 
-  <div class="card box-shadow-sm">
+  <div class="card box-shadow-sm" *ngIf="producto == undefined">
+    <div class="card-body">
+     <h3  class="text-center">No se encontro el registro</h3>
+     <div class="row">
+       <div class="col-3 mx-auto">
+         <img src="assets/img/advertencia.png" alt="" style="width: 100%">
+       </div>
+     </div>
+    </div>
+    </div>
+    
+    
+
+  <div class="card box-shadow-sm" *ngIf="producto">
         <div class="card-header">
-            <h5 style="margin-bottom: 0px;">Inventario de  {{ producto.titulo }} </h5>
+            <h5 style="margin-bottom: 0px;">Inventario de  {{ producto.titulo }} </h5> 
         </div>
         <div class="card-header">
             <div class="row">
-                
+                <div class="col-12">
+                  <form  #inventarioForm="ngForm" (ngSubmit)="registro_inventario(inventarioForm)" class="form-inline">
+                    <label class="sr-only">Cantidad</label>
+                      <input required class="form-control mb-3 mr-sm-4" type="text" placeholder="Cantidad" name="cantidad"  [(ngModel)]="inventario.cantidad">                  
+
+                    <label class="sr-only">Proveedor</label>
+                      <input required class="form-control mb-3 mr-sm-4" type="text" placeholder="Proveedor" name="proveedor"   [(ngModel)]="inventario.proveedor">
+                   
+                    <button class="btn btn-primary mb-3" type="submit">Ingresar</button>
+                  </form>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -27,10 +50,52 @@
                       <th>Admin</th>  
                       <th>Cantidad</th>
                       <th>Provedor</th>
-                      
                       <th>OP</th>
                     </tr>
                   </thead>
+                      
+                  <ng-container *ngIf="inventarios.length == 0">
+                    <tbody>
+                      <tr>
+                        <td  colspan="4" class="text-center">
+                          <span class="text-muted" >No hay registros en el inventario</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </ng-container>
+
+                  <ng-container >
+                    <tbody *ngFor="let item of inventarios"> 
+                      <tr>
+                        <td> {{item.admin.nombres}}  {{item.admin.apellidos}} </td>
+                        <td> {{item.cantidad}} </td>
+                        <td> {{item.proveedor}} </td>
+                        <td>
+                          <button  class="btn btn-danger btn-sm"  data-toggle="modal" [attr.data-target]="'#delete-'+item._id">
+                            <i class=" cxi-delete"></i>
+                          </button>
+                          <div class="modal fade" id="delete-{{item._id }}" tabindex="-1" style="display: none;" aria-hidden="true">    
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Confirmacion de eliminacion </h4>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="fs-sm">Desea eliminar este registro?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button   class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Cancelar</button>
+                                  <button   class="btn btn-primary btn-sm"  (click)="eliminar(item._id)" type="button">Si, eliminar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+  
+                        </td>
+                      </tr>
+                    </tbody>
+                  </ng-container>
     
                 </table>
             </div>
