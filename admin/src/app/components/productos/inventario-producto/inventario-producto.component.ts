@@ -27,7 +27,7 @@ export class InventarioProductoComponent implements OnInit {
   constructor(  private _route: ActivatedRoute,
                 private _productoService: ProductoService) { 
                   this.token = localStorage.getItem('token');
-                  this._iduser = localStorage.getItem('_id');
+                  this._iduser = localStorage.getItem('id');
                   console.log(this._iduser);
                 }
 
@@ -35,7 +35,7 @@ export class InventarioProductoComponent implements OnInit {
     this._route.params.subscribe(
       params=>{
         this.id = params['id'];
-      // console.log(this.id);
+     //  console.log(this.id);
         this._productoService.obtener_producto_admin(this.id,this.token).subscribe(
           response=>{
            // console.log(response);
@@ -48,7 +48,7 @@ export class InventarioProductoComponent implements OnInit {
                response=>{
                // console.log(response);
                this.inventarios = response.data;
-               console.log(this.inventarios);
+            //   console.log(this.inventarios);
                },
                error=>{
                 console.log(error); 
@@ -122,10 +122,29 @@ export class InventarioProductoComponent implements OnInit {
         admin: this._iduser,
         proveedor: inventarioForm.value.proveedor
       }
-      //console.log(data);
-  /*     this._productoService.registro_inventario_producto_admin(data,this.token).subscribe(
+      console.log(data);
+      this._productoService.registro_inventario_producto_admin(data,this.token).subscribe(
         response=>{
-          console.log(response);
+          //console.log(response);
+          iziToast.show({
+            title:'SUCCESS',
+            titleColor:'#1DC74C',
+            color: '#FFF',
+            class: 'text-success',
+            position:'topRight',
+            message:'se agrego el nuevo stock al producto'
+          });
+
+          this._productoService.listar_inventario_producto_admin(this.producto._id,this.token).subscribe(
+            response=>{
+            // console.log(response);
+            this.inventarios = response.data;
+         //   console.log(this.inventarios);
+            },
+            error=>{
+             console.log(error); 
+            }
+          )
           
         },
         error=>{
@@ -133,7 +152,7 @@ export class InventarioProductoComponent implements OnInit {
         }
         
       )
-  */
+  
 
     } else {
       iziToast.show({
