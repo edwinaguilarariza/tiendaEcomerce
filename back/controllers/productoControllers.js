@@ -40,7 +40,7 @@ const registro_producto_admin = async function(req,res){
 }
 
 
-const listar_productos_admin = async function(req,res){
+const listar_productos_admin = async function(req,res){ 
 
     if (req.user) {
         if (req.user.role == 'admin' ) {

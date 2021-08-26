@@ -1,12 +1,13 @@
 'use strict'
 
 var express = require('express');
-var CuponController = require('../controllers/cuponController');
+var cuponController = require('../controllers/cuponController');
 
 var api = express.Router();
 var auth = require('../middlewares/authenticate');
 
-api.post('/registro_cupon_admin',auth.auth,CuponController.registro_cupon_admin);
+api.post('/registro_cupon_admin',auth.auth,cuponController.registro_cupon_admin);
+api.get('/listar_cupones_admin/:filtro?',auth.auth,cuponController.listar_cupones_admin);
 
 module.exports = api;
 
