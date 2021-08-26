@@ -25,5 +25,19 @@ export class CuponService {
   return this._http.get(this.url+'listar_cupones_admin/'+filtro,{headers:headers} );
 }
 
+obtener_cupon_admin( id: any, token: any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+  return this._http.get(this.url+'obtener_cupon_admin/'+id,{headers:headers} );
+}
+
+actualizar_cupon_admin( id: any, data:any ,token: any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+  return this._http.put(this.url+'actualizar_cupon_admin/'+id,data,{headers:headers} ); 
+}
+
+eliminar_cupon_admin( id: any ,token: any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+  return this._http.delete(this.url+'eliminar_cupon_admin/'+id,{headers:headers} ); 
+}
 
 }

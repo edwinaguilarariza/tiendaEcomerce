@@ -15,7 +15,7 @@ export class CreateCuponComponent implements OnInit {
   public load_btn = false;
   public token;
 
-  constructor( private  _cuponService: CuponService ,
+  constructor( private  _cuponService: CuponService , 
                 private _router: Router ) { 
         this.token = localStorage.getItem('token');
   }
@@ -26,10 +26,10 @@ export class CreateCuponComponent implements OnInit {
   registro(registroForm:any){  
     if (registroForm.valid) {
       this.load_btn = true;
-     // console.log(this.cupon);
-      this._cuponService.registro_cupon_admin(this.cupon,this.token).subscribe( 
+      
+      this._cuponService.registro_cupon_admin(this.cupon,this.token).subscribe(  
           response=>{
-            //console.log(response);
+         
             iziToast.show({
               title:'SUCCESS',
               titleColor:'#1DC74C',
