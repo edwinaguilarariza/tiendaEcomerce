@@ -24,7 +24,7 @@ public file : any = undefined;
 //public load_data = true;
 
   constructor( private _route: ActivatedRoute,
-               private _productoService: ProductoService,
+               private _productoService: ProductoService, 
                private _router: Router ) { 
     this.config ={
       height:500 

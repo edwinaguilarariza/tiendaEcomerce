@@ -93,7 +93,7 @@ const obtener_producto_admin = async function(req,res){
     }
 }
 
-const actualizar_producto_admin = async function(req,res){
+const actualizar_producto_admin = async function(req,res){ 
     if (req.user) {
         if (req.user.role == 'admin' ) {
             let id = req.params['id'];
