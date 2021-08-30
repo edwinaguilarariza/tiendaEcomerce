@@ -14,7 +14,7 @@ declare var $:any;
   templateUrl: './create-producto.component.html',
   styleUrls: ['./create-producto.component.css']
 })
-export class CreateProductoComponent implements OnInit {  
+export class CreateProductoComponent implements OnInit {   
 
 public producto: any = {
   categoria: ''
@@ -24,6 +24,7 @@ public imgSelect : any | ArrayBuffer = 'assets/img/01.jpg';
 public config : any = {};
 public token;
 public load_btn = false;
+public config_global : any = {};
 
   constructor( private _productoService: ProductoService,
                 private _adminService: AdminService,
@@ -33,6 +34,12 @@ public load_btn = false;
       height:500 
     }
     this.token = this._adminService.getToken();
+    this._adminService.obtener_config_publico().subscribe(
+      response=>{
+        this.config_global = response.data;
+        console.log(this.config_global);
+      }
+    )
   }
 
   ngOnInit(): void {
