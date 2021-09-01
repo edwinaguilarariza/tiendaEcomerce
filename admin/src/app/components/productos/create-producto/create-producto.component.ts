@@ -19,7 +19,7 @@ export class CreateProductoComponent implements OnInit {
 public producto: any = {
   categoria: ''
 };
-public file : any = undefined;
+public file : any = undefined; 
 public imgSelect : any | ArrayBuffer = 'assets/img/01.jpg';
 public config : any = {};
 public token;
