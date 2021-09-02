@@ -69,7 +69,7 @@
             <div class="col-md-9">
              
               <div class="table-responsive mt-3">
-                <table class="table table-sm" *ngIf="producto.galeria">
+                <table class="table table-sm table-bordered" *ngIf="producto.galeria">
                   <thead class="thead-dark">
                     <tr>
                
@@ -92,7 +92,37 @@
 
                   <ng-container *ngIf="producto.galeria.length >= 1">
                     <tbody *ngFor="let item of producto.galeria; let indice = index" >
-                      
+                      <tr>
+                        <td>
+                          <p>
+                            <img  [src]="url + 'obtener_portada/' + item.imagen" alt="" style="width: 80px;">
+                            {{item.imagen}}
+                          </p>
+                        </td>
+                        <td><a style="cursor:pointer;" class="text-danger" data-toggle="modal" [attr.data-target]="'#delete-'+item._id" >[Eliminar]</a></td>
+                      </tr>
+
+                      <div class="modal fade" id="delete-{{item._id }}" tabindex="-1" style="display: none;" aria-hidden="true">    
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Confirmacion de eliminacion </h4>
+                              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p > Desea eliminar esta imagen?</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Cancelar</button>
+                              <button *ngIf="!load_btn_eliminar" class="btn btn-primary btn-sm"  (click)="eliminar(item._id)" type="button">Si, eliminar</button>
+                              <button *ngIf="load_btn_eliminar"  type="button" class="btn btn-secondary" disabled >
+                               <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true" ></span> 
+                               eliminando...
+                            </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </tbody>
                   </ng-container>
 

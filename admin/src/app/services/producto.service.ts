@@ -87,6 +87,20 @@ actualizar_producto_variedades_admin( data: any , id: any , token: any):Observab
   return this._http.put(this.url+'actualizar_producto_variedades_admin/'+id,data,{headers:headers} );
 }
   
+agregar_imagen_galeria_admin( id: any ,  data: any  , token: any):Observable<any>{
+  let headers = new HttpHeaders({'Authorization':token });
+
+  const fd  = new FormData();
+
+  fd.append('_id',data.id);
+  fd.append('imagen',data.imagen);
+  return this._http.put(this.url+'agregar_imagen_galeria_admin/'+id,fd,{headers:headers} );
+}
+ 
+eliminar_imagen_galeria_admin( id: any , data: any  , token: any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+  return this._http.put(this.url+'eliminar_imagen_galeria_admin/'+id,data,{headers:headers} );
+}
 
 }
 
