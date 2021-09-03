@@ -299,7 +299,7 @@ const eliminar_imagen_galeria_admin = async function(req,res){
             //console.log(data);
           //console.log(req.files); 
         
-          let reg = await Producto.findByIdAndUpdate({_id:id},{$pull: {galeria: {_id:data._id}}});
+          let reg = await Producto.findByIdAndUpdate({_id:id},{$pull: {galeria: {_id:data._id}}});   
             
         
             res.status(200).send({data:reg});
@@ -309,7 +309,7 @@ const eliminar_imagen_galeria_admin = async function(req,res){
             res.status(500).send({message:'NoAccess'});
         }
     }else{
-        res.status(500).send({message:'NoAccess'});
+        res.status(500).send({message:'NoAccess'});   
     }
 }
 
