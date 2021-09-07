@@ -210,7 +210,7 @@ const obtener_cliente_guest = async function(req,res){
         }
        
     }else{
-        res.status(500).send({message:'NoAccess'});
+        res.status(500).send({message:'NoAccess'}); 
     }
 }
 

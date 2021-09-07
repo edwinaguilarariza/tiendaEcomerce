@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor( private _adminService: AdminService,
                 private _router: Router ) { 
-                this.token = _adminService.getToken();
+                this.token = _adminService.getToken(); 
                 }
 
   ngOnInit(): void {
