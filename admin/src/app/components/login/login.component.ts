@@ -4,7 +4,7 @@ import { AdminService } from 'src/app/services/admin.service';
 
 declare var jQuery: any;
 declare var $:any;
-declare var iziToast: any;
+declare var iziToast: any; 
 
 @Component({
   selector: 'app-login',
