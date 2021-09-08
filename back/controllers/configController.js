@@ -25,7 +25,7 @@ const obtener_config_admin = async function(req,res){
   
 
 
-const actualizar_config_admin = async function(req,res){
+const actualizar_config_admin = async function(req,res){ 
     if (req.user) {
         if (req.user.role == 'admin' ) {
 

@@ -33,10 +33,15 @@ export class AdminService {
       }
       try {
         const helper = new JwtHelperService();
-        var decodedToken = helper.decodeToken(token);
+        var decodedToken = helper.decodeToken(token); 
+
+        if (helper.isTokenExpired(token)) {
+          localStorage.clear();
+          return false;
+        }
        
         if (!decodedToken) {
-          console.log('No acceso');
+          console.log('NO ES VALIDO');
           localStorage.removeItem('token');
           return false;
         }
@@ -64,7 +69,7 @@ export class AdminService {
     
         return this._http.put(this.url+'actualizar_config_admin/'+id,fd,{headers:headers} );
       } else {
-        let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token });
+        let headers = new HttpHeaders({'Content-Type': 'application/json' ,'Authorization':token }); 
         return this._http.put(this.url+'actualizar_config_admin/'+id,data,{headers:headers} );
       } 
       }
