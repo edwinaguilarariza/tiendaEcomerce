@@ -45,11 +45,11 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-email">Correo electronico</label>
-                  <input type="email"  required class="form-control form-control-lg" placeholder="ann.black@example.com" name="email" [(ngModel)]="cliente.email">
+                  <input type="email"  required class="form-control form-control-lg" readonly value="{{cliente.email}}">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-phone">Contraseña</label>
-                  <input type="password" required class="form-control form-control-lg" placeholder="Nueva contraseña" name="password"  [(ngModel)]="cliente.password">
+                  <input type="password"  autocomplete="new-password" required class="form-control form-control-lg" placeholder="Nueva contraseña" id="input_password">
                 </div>
                 <div class="col-sm-6 form-group">
                     <label for="ac-email">Telefono</label>
@@ -66,7 +66,7 @@
                
                 <div class="col-sm-6 form-group">
                   <label for="ac-country">Genero</label>
-                  <select id="ac-country" required class="custom-select custom-select-lg">
+                  <select id="ac-country" required class="custom-select custom-select-lg" name="genero" [(ngModel)]="cliente.genero" >
                     <option value="" disabled selected>Seleccionar</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-city">Pais</label>
-                  <select id="ac-city" required class="custom-select custom-select-lg">
+                  <select id="ac-city" required class="custom-select custom-select-lg" name="pais" [(ngModel)]="cliente.pais">
                     <option value="" disabled selected>Seleccionar</option>
                     <option value="Argentina">Argentina</option>
                     <option value="Bolivia">Bolivia</option>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from 'src/app/services/cliente.service';
-
-
-
 declare var jQuery: any;
 declare var $:any;
 declare var iziToast: any;
+
+
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -42,7 +42,20 @@ export class PerfilComponent implements OnInit {
 
 actualizar(actualizarForm:any){
   if (actualizarForm.valid) {
-    console.log(this.cliente);
+    this.cliente.password = $('#input_password').val();
+    this._clienteService.actualizar_perfil_cliente_guest(this.id,this.cliente,this.token).subscribe(
+      response=>{
+        iziToast.show({
+          title:'SUCCESS',
+          titleColor:'#1DC74C',
+          color: '#FFF',
+          class: 'text-success',
+          position:'topRight',
+          message:'se actualizo su perfil correctamente'
+        })
+        
+      }
+    )
     
   } else {
     iziToast.show({

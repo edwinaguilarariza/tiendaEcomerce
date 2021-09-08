@@ -27,8 +27,7 @@ export class SidebarComponent implements OnInit {
           localStorage.setItem('user_data',JSON.stringify(this.user)); 
           if (localStorage.getItem('user_data')) {
             this.user_lc = localStorage.getItem('user_data');
-             console.log(this.user_lc);
-           // console.log( this.user);
+           
            }else{
              this.user_lc = undefined;
            }
