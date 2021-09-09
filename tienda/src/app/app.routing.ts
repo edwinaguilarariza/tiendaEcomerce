@@ -16,6 +16,7 @@ const appRoute : Routes = [
    { path:'cuenta/perfil', component: PerfilComponent , canActivate:[AuthGuard]},
    
    { path:'productos', component: IndexProductoComponent },
+   { path:'productos/categoria/:categoria', component: IndexProductoComponent },
 ]
 
 export const appRoutingProviders : any[]=[];

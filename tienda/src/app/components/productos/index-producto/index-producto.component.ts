@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { GLOBAL } from 'src/app/services/GLOBAL';
 declare var noUiSlider: any ;
 //declare var jQuery: any;
 declare var $:any;
@@ -12,17 +14,58 @@ export class IndexProductoComponent implements OnInit {
 
   public config_global: any = {};
   public filter_categoria :any = '';
+  public productos : Array<any> = [];
+  public filter_producto = '' ;
+  public url ;
+  public filter_cat_productos = 'todos';
+
+  public load_data = true;
+  public route_categoria : any;
 
   constructor(
-    private _clienteService: ClienteService
+    private _clienteService: ClienteService,
+    private _route: ActivatedRoute
   ) {
+    this.url = GLOBAL.url;
     this._clienteService.obtener_config_publico().subscribe(
       response=>{
         this.config_global = response.data;
-        console.log(this.config_global);
       }
     )
-   }
+        
+
+      this._route.params.subscribe(
+        params=>{
+          this.route_categoria = params['categoria'];
+
+           if (this.route_categoria) {
+            this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+              response=>{
+                this.productos = response.data;
+                this.productos = this.productos.filter(item=>item.categoria.toLowerCase()  == this.route_categoria);
+                this.load_data = false;
+              }
+            )
+           }else{
+            this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+              response=>{
+                this.productos = response.data;
+                this.load_data = false;
+              }
+            )
+           }
+          
+        }
+      )
+    }
+
+
+ 
+      
+        
+        
+    
+      
 
   ngOnInit(): void {
     var slider : any = document.getElementById('slider');
@@ -50,7 +93,7 @@ export class IndexProductoComponent implements OnInit {
   }
 
   buscar_categorias(){
-    console.log(this.filter_categoria);
+    
     if (this.filter_categoria) {
       let search = new RegExp(this.filter_categoria, 'i');
       this.config_global.categorias = this.config_global.categorias.filter(
@@ -64,7 +107,66 @@ export class IndexProductoComponent implements OnInit {
         }
       )
     }
+    
   }
 
+  buscar_producto(){
+    this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+      response=>{
+      
+        this.productos = this.productos.filter(item=>item.categoria.tolowerCase() == this.filter_cat_productos);
+        this.load_data = false;
+      }
+      
+    )
+  }
+
+  buscar_precios(){
+
+    
+    this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+      response=>{
+      
+        this.productos = response.data;
+      
+        let min = parseInt($('.cs-range-slider-value-min').val());
+        let max = parseInt($('.cs-range-slider-value-max').val());
+        console.log(min);
+        console.log(max);
+    
+        this.productos = this.productos.filter((item=>{
+          return item.precio >= min && item.precio <= max
+        }))
+    }
+      
+    )
+  }
+
+  buscar_por_categoria(){
+    if (this.filter_cat_productos == 'todos') {
+      this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+        response=>{
+          this.productos = response.data;
+          this.load_data = false;
+          
+        }
+        )
+      } else {
+        this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+          response=>{
+            this.productos = response.data;
+            this.productos = this.productos.filter(item=>item.categoria == this.filter_cat_productos);
+            this.load_data = false;
+          }
+        );
+      }
+      
+      
+    }
+        
+          
+          
+        
+        
 
 }
