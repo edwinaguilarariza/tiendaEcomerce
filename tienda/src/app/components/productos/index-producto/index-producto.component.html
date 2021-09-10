@@ -33,56 +33,31 @@
           <div class="col-md-9">
             <div class="d-flex align-items-center">
               <div class="form-inline flex-nowrap mr-3 mr-xl-5">
-                <label for="sorting-top" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-lg-block">Sort by</label>
-                <select id="sorting-top" class="custom-select">
-                  <option>Popularity</option>
-                  <option>Low - Hight Price</option>
-                  <option>High - Low Price</option>
-                  <option>Average Rating</option>
-                  <option>A - Z Order</option>
-                  <option>Z - A Order</option>
+                <label for="sorting-top" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-lg-block">Ordenar por</label>
+                <select id="sorting-top" class="custom-select" name="sort_by" [(ngModel)]="sort_by" (change)="orden_por()">
+                  <option value="Defecto">Defecto</option>
+                  <option value="Popularidad">Popularidad</option>
+                  <option value="+-Precio">Mayor - Menor precio</option>
+                  <option value="-+Precio">Menor - Mayor precio</option>
+                  <option value="azTitulo">A - Z Order</option>
+                  <option value="zaTitulo">Z - A Order</option>
                 </select>
               </div>
               <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5">
-                <label for="pager-top" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-lg-block">Show</label>
-                <select id="pager-top" class="custom-select">
-                  <option>12</option>
-                  <option>24</option>
-                  <option>48</option>
-                  <option>72</option>
-                  <option>96</option>
+                <label for="pager-top" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-lg-block">Ver</label>
+                <select id="pager-top" class="custom-select" name="pageSize" [(ngModel)]="pageSize">
+                  <option value="3">3</option>
+                  <option value="15">15</option>
+                  <option value="21">21</option>
+                  <option value="28">28</option>
                 </select>
-                <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-lg-block">products per page</span>
+                <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-lg-block">productos por pagina</span> 
               </div>
-              <nav class="ml-auto" aria-label="Pagination">
-                <ul class="pagination mb-0">
-                  <li class="page-item d-sm-none">
-                    <span class="page-link page-link-static">1 / 5</span>
-                  </li>
-                  <li class="page-item active d-none d-sm-block" aria-current="page">
-                    <span class="page-link">1
-                      <span class="sr-only">(current)</span>
-                    </span>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">5</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="cxi-arrow-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize" 
+              [collectionSize]="productos.length" >
+          </ngb-pagination>
             </div>
           </div>
         </div>
@@ -238,48 +213,59 @@
             <div  *ngIf="!load_data" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
 
               <!-- Item -->
-              <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let item of productos">
-                <div class="card card-product mx-auto">
-                  <div class="card-product-img">
-                    <a href="shop-single.html" class="card-img-top">
-                      <img [src]="url + 'obtener_portada/' + item.portada" alt="Product image">
-                    </a>
-                    <div class="card-product-widgets-top">
-                      <div class="star-rating ml-auto">
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                      </div>
-                    </div>
-                    <div class="card-product-widgets-bottom">
-                      <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                    </div>
-                  </div>
-                  <div class="card-body pb-2">
-                    <h3 class="card-product-title text-truncate mb-2">
-                      <a href="shop-single.html" class="nav-link">{{item.titulo}}</a>
-                    </h3>
-                    <div class="d-flex align-items-center">
-                      <span class="h5 d-inline-block mb-0">{{item.precio}}</span>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <div class="d-flex align-items-center mb-2 pb-1">
-                      <div class="row">
-                        <div class="col-12">
-                           <a href="">  {{item.categoria}}</a>
+              <ng-container *ngIf="productos.length == 0">
+                <div class="col-lg-12 col-md-5">
+                  <h3 class="h6 mb-2 text-uppercase">No se encontraron productos</h3>
+                  <h2 class="h1 pb-lg-3">Es posible que sea un error</h2>
+                 
+                  <a style="cursor: pointer;" class="btn btn-gradient btn-hover-shadow" (click)="reset_productos()">Mostrar todos los productos</a>
+              </div>
+              </ng-container>
+
+              <ng-container *ngIf="productos.length >= 1" >
+                <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let item of productos | slice: ( page-1 ) * pageSize : ( page -1 ) * pageSize + pageSize;">
+                  <div class="card card-product mx-auto">
+                    <div class="card-product-img">
+                      <a href="shop-single.html" class="card-img-top">
+                        <img [src]="url + 'obtener_portada/' + item.portada" alt="Product image">
+                      </a>
+                      <div class="card-product-widgets-top">
+                        <div class="star-rating ml-auto">
+                          <i class="sr-star cxi-star-filled active"></i>
+                          <i class="sr-star cxi-star-filled active"></i>
+                          <i class="sr-star cxi-star-filled active"></i>
+                          <i class="sr-star cxi-star-filled active"></i>
+                          <i class="sr-star cxi-star-filled active"></i>
                         </div>
                       </div>
+                      <div class="card-product-widgets-bottom">
+                        <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
+                      </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-block">
-                      <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                      Add to cart
-                    </button>
+                    <div class="card-body pb-2">
+                      <h3 class="card-product-title text-truncate mb-2">
+                        <a href="shop-single.html" class="nav-link">{{item.titulo}}</a>
+                      </h3>
+                      <div class="d-flex align-items-center">
+                        <span class="h5 d-inline-block mb-0">{{item.precio}}</span>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <div class="d-flex align-items-center mb-2 pb-1">
+                        <div class="row">
+                          <div class="col-12">
+                             <a href="">  {{item.categoria}}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-primary btn-block"> 
+                        <i class="cxi-cart align-middle mt-n1 mr-2"></i>
+                        Add to cart
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </div> 
+              </ng-container>
 
           
             </div>
@@ -287,56 +273,31 @@
             <!-- Toolbar + Pagination -->
             <div class="d-flex align-items-center pt-md-4">
               <div class="form-inline flex-nowrap mr-3 mr-xl-5 pt-1">
-                <label for="sorting-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Sort by</label>
-                <select id="sorting-bottom" class="custom-select">
-                  <option>Popularity</option>
-                  <option>Low - Hight Price</option>
-                  <option>High - Low Price</option>
-                  <option>Average Rating</option>
-                  <option>A - Z Order</option>
-                  <option>Z - A Order</option>
+                <label for="sorting-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Ordenar por</label>
+                <select id="sorting-bottom" class="custom-select" name="sort_by" [(ngModel)]="sort_by" (change)="orden_por()">
+                  <option value="Defecto">Defecto</option>
+                  <option value="Popularidad">Popularidad</option>
+                  <option value="+-Precio">Mayor - Menor precio</option>
+                  <option value="-+Precio">Menor - Mayor precio</option>
+                  <option value="azTitulo">A - Z Order</option>
+                  <option value="zaTitulo">Z - A Order</option>
                 </select>
               </div>
               <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5 pt-1">
-                <label for="pager-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Show</label>
-                <select id="pager-bottom" class="custom-select">
-                  <option>12</option>
-                  <option>24</option>
-                  <option>48</option>
-                  <option>72</option>
-                  <option>96</option>
+                <label for="pager-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Ver</label>
+                <select id="pager-bottom" class="custom-select" name="pageSize" [(ngModel)]="pageSize">
+                  <option value="15">15</option>
+                  <option value="21">21</option>
+                  <option value="28">28</option>
+                  
                 </select>
-                <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-md-block">products per page</span>
+                <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-md-block">productos por paginas</span>
               </div>
-              <nav class="pt-1 ml-auto" aria-label="Pagination">
-                <ul class="pagination mb-0">
-                  <li class="page-item d-sm-none">
-                    <span class="page-link page-link-static">1 / 5</span>
-                  </li>
-                  <li class="page-item active d-none d-sm-block" aria-current="page">
-                    <span class="page-link">1
-                      <span class="sr-only">(current)</span>
-                    </span>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item d-none d-sm-block">
-                    <a class="page-link" href="#">5</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="cxi-arrow-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize" 
+              [collectionSize]="productos.length" >
+          </ngb-pagination>
             </div>
           </div>
         </div>
