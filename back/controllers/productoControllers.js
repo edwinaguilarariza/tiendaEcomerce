@@ -324,10 +324,20 @@ const listar_productos_publico = async function(req,res){
    
     let reg = await Producto.find({titulo: new RegExp(filtro,'i')});
     res.status(200).send({data:reg}); 
+}
+   
+const obtener_productos_slug_publico = async function(req,res){ 
+
+    let slug = req.params['slug'];
+   
+    let reg = await Producto.findOne({slug: slug});
+    res.status(200).send({data:reg}); 
+}
          
 
 
-}
+
+
 
 
 
@@ -344,5 +354,6 @@ module.exports = {
     actualizar_producto_variedades_admin,
     agregar_imagen_galeria_admin,
     eliminar_imagen_galeria_admin,
-    listar_productos_publico   
+    listar_productos_publico,
+    obtener_productos_slug_publico   
 }

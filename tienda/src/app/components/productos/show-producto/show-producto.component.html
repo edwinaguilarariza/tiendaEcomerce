@@ -7,22 +7,20 @@
         <div class="container">
           <ol class="breadcrumb breadcrumb-alt mb-0">
             <li class="breadcrumb-item">
-              <a href="index.html"><i class="cxi-home"></i></a>
+              <a [routerLink]="['/']" ><i class="cxi-home"></i></a>
             </li>
+            
             <li class="breadcrumb-item">
-              <a href="shop-catalog.html">Women</a>
+              <a  *ngIf="producto.categoria" [routerLink]="['/productos/categoria/',producto.categoria.toLowerCase()]" routerLinkActive="router-link-active" >{{producto.categoria}}</a>
             </li>
-            <li class="breadcrumb-item">
-              <a href="shop-catalog.html">Clothes</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Basic hooded sweatshirt in pink</li>
+            <li class="breadcrumb-item active" aria-current="page">{{producto.titulo}}</li>
           </ol>
         </div>
       </nav>
       
       <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
-        <h1 class="mb-2 mb-md-0">Basic hooded sweatshirt in pink</h1>
-        <span class="text-muted"><strong>Art. No.</strong> 183260098</span>
+        <h1 class="mb-2 mb-md-0">{{producto.titulo}}</h1>
+        <span class="text-muted" *ngIf="producto._id"><strong>Art. No.</strong> {{producto._id.toUpperCase()}}</span>
       </section>
 
       <section class="container py-md-6 py-5 mb-2">
@@ -34,53 +32,20 @@
               <div class="cs-carousel-inner" data-carousel-options=''>
 
                 <!-- Product gallery item -->
-                <a class="cs-gallery-item" href="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" data-sub-html='<h6 class="text-light">Gallery image caption #1</h6>'>
-                  <img class="rounded" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Carousel image">
-                  <span class="cs-gallery-caption">Gallery image caption #1</span>
+                <a class="cs-gallery-item"  *ngFor="let item of producto.galeria; let indice = index" href="{{url + 'obtener_portada/' + item.imagen}}" data-sub-html='<h6 class="text-light">Gallery image caption #1</h6>'>
+                  <img class="rounded" [src]="url + 'obtener_portada/' + item.imagen" alt="Carousel image">
+                  <span class="cs-gallery-caption">Imagen # {{indice+1}}</span>
                 </a>
 
-                <!-- Product gallery item -->
-                <a class="cs-gallery-item" href="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" data-sub-html='<h6 class="text-light">Gallery image caption #2</h6>'>
-                  <img class="rounded" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Carousel image">
-                  <span class="cs-gallery-caption">Gallery image caption #2</span>
-                </a>
-
-                <!-- Product gallery item -->
-                <a class="cs-gallery-item" href="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" data-sub-html='<h6 class="text-light">Gallery image caption #3</h6>'>
-                  <img class="rounded" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Carousel image">
-                  <span class="cs-gallery-caption">Gallery image caption #3</span>
-                </a>
-
-                <!-- Product gallery item -->
-                <a class="cs-gallery-item" href="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" data-sub-html='<h6 class="text-light">Gallery image caption #4</h6>'>
-                  <img class="rounded" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Carousel image">
-                  <span class="cs-gallery-caption">Gallery image caption #4</span>
-                </a>
-
-                <!-- Product gallery video item -->
-                <a class="cs-gallery-item video-item" href="https://www.youtube.com/watch?v=1vrXpMLLK14" data-sub-html='<h6 class="text-light">Gallery image caption #5</h6>'>
-                  <img class="rounded" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Carousel image">
-                  <span class="cs-gallery-caption">Gallery image caption #5</span>
-                </a>
+             
               </div>
 
               <!-- Product gallery thumbnails -->
               <div class="cs-thumbnails" id="cs-thumbnails">
-                <button type="button" data-nav="0">
-                  <img src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Thumbnail">
+                <button type="button"  *ngFor="let item of producto.galeria; let indice = index" [attr.data-nav]="indice">
+                  <img [src]="url + 'obtener_portada/' + item.imagen"  alt="Thumbnail">
                 </button>
-                <button type="button" data-nav="1">
-                  <img src="https://createx.createx.studio/assets/img/ecommerce/shop/single/02.jpg" alt="Thumbnail">
-                </button>
-                <button type="button" data-nav="2">
-                  <img src="https://createx.createx.studio/assets/img/ecommerce/shop/single/03.jpg" alt="Thumbnail">
-                </button>
-                <button type="button" data-nav="3">
-                  <img src="https://createx.createx.studio/assets/img/ecommerce/shop/single/04.jpg" alt="Thumbnail">
-                </button>
-                <button type="button" data-nav="4" class="video-indicator">
-                  <img src="https://createx.createx.studio/assets/img/ecommerce/shop/single/05.jpg" alt="Thumbnail">
-                </button>
+                
               </div>
             </div>
           </div>
@@ -89,7 +54,7 @@
 
               <!-- Price -->
               <div class="d-flex align-items-center mb-sm-0 mb-4">
-                <span class="h3 d-inline-block mb-0 text-danger">$15.50</span>
+                <span class="h3 d-inline-block mb-0 text-danger">${{producto.precio}}</span>
                 <del class="d-inline-block ml-2 pl-1 font-size-lg text-muted">$31.00</del>
                 <span class="ml-4 p-2 badge badge-danger font-size-base font-weight-bold">- 50%</span>
               </div>
@@ -109,7 +74,7 @@
 
             <!-- Ordering form -->
             <form class="row">
-              <div class="col-12">
+             <!--  <div class="col-12">
                 <div class="form-group">
                   <label for="pink">Color</label>
                   <div class="d-flex align-items-middle">
@@ -134,22 +99,21 @@
                     <span class="d-inline-block pl-2 text-muted" id="colorOptionText">Pink</span>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-sm-8 order-sm-1 order-2">
                 <div class="form-group">
-                  <label for="size">Size</label>
+                  <label for="size">{{producto.variedades}}</label>
                   <select class="form-control custom-select" id="size">
-                    <option>Please select</option>
-                    <option>Option item 1</option>
-                    <option>Option item 2</option>
-                    <option>Option item 3</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option  value="{{item.titulo}}" *ngFor="let item of producto.variedades">{{item.titulo}}</option>
+                   
                   </select>
                 </div>
               </div>
               <div class="col-sm-4 order-sm-2 order-1 text-sm-right">
-                <a href="#modal-sizing" data-toggle="modal" class="d-inline-block mt-sm-4 mb-sm-0 mb-4 pt-sm-3 font-weight-bold text-decoration-0 text-dark">
+                <a  style="margin-top: 0px !important;" *ngIf="producto.categoria == 'moda'" href="#modal-sizing" data-toggle="modal" class="d-inline-block mt-sm-4 mb-sm-0 mb-4 pt-sm-3 font-weight-bold text-decoration-0 text-dark">
                   <i class="cxi-hanger mr-2"></i>
-                  Size chart
+                  Tallas
                 </a>
               </div>
               <div class="col-lg-2 col-4 order-lg-3 order-3">
@@ -165,13 +129,13 @@
               <div class="col-lg-6 order-lg-4 order-4">
                 <button class="btn btn-block btn-primary">
                   <i class="cxi-cart mr-2"></i>
-                  Add to cart
+                  Agregar al Carrito
                 </button>
               </div>
               <div class="col-lg-4 col-8 order-lg-5 order-2">
                 <button class="btn btn-block btn-outline-primary px-lg-4">
                   <i class="cxi-heart mr-2"></i>
-                  Favourite
+                  a deseos
                 </button>
               </div>
             </form>
@@ -192,7 +156,7 @@
                 <div class="collapse" id="delivery" aria-labelledby="delivery-card" data-parent="#productTerms">
                   <div class="card-body">
                     <p class="font-size-sm">
-                      Free standard shipping on orders <strong>over $35</strong> before tax, plus free returns.
+                      Envios estandar grauito en pedidos superiores <strong>a $35</strong> antes de impuestos,mas devoluciones gratuitas.
                     </p>
 
                     <!-- Delivery table -->
@@ -232,14 +196,14 @@
               <div class="card border-bottom">
                 <div class="card-header" id="return-card">
                   <h6 class="accordion-heading">
-                    <a class="collapsed" href="#return" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="return">Return
+                    <a class="collapsed" href="#return" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="return">Devoluciones
                       <span class="accordion-indicator"></span>
                     </a>
                   </h6>
                 </div>
                 <div class="collapse" id="return" aria-labelledby="return-card" data-parent="#productTerms">
                   <p class="font-size-sm">
-                    You have <strong>60 days</strong> to return the item(s) using any of the following methods:
+                    Tiene 60 dias para devolver el (los) articulo (s) utilizando algino de los siguentes metodos:
                   </p>
                   <ul class="mb-4 pl-3">
                     <li>Free store return</li>
@@ -251,28 +215,28 @@
 
             <!-- Share -->
             <div class="mb-5 text-nowrap">
-              <h6 class="d-inline-block align-middle mr-2 mb-0">Share:</h6>
-              <a href="#" class="social-btn sb-solid align-middle mr-2" data-toggle="tooltip" title="Facebook">
+              <h6 class="d-inline-block align-middle mr-2 mb-0">Compartir:</h6>
+              <a  class="social-btn sb-solid align-middle mr-2" data-toggle="tooltip" title="Facebook">
                 <i class="cxi-facebook"></i>
               </a>
-              <a href="#" class="social-btn sb-solid align-middle mr-2" data-toggle="tooltip" title="Twitter">
+              <a  class="social-btn sb-solid align-middle mr-2" data-toggle="tooltip" title="Twitter">
                 <i class="cxi-twitter"></i>
               </a>
-              <a href="#" class="social-btn sb-solid align-middle" data-toggle="tooltip" title="Pinterest">
+              <a  class="social-btn sb-solid align-middle" data-toggle="tooltip" title="Pinterest">
                 <i class="cxi-pinterest"></i>
               </a>
             </div>
 
             <!-- Payment -->
             <div class="pb-3 text-nowrap" data-simplebar data-simplebar-auto-hide="false">
-              <a href="#" class="d-inline-block mb-3 mr-xl-4 mr-3">
-                <img src="../../assets/img/ecommerce/shop/single/cards/visa.jpg" alt="Visa" class="border rounded">
+              <a  class="d-inline-block mb-3 mr-xl-4 mr-3">
+                <img src="assets/img/visa.jpg" alt="Visa" class="border rounded">
               </a>
-              <a href="#" class="d-inline-block mb-3 mr-xl-4 mr-3">
-                <img src="../../assets/img/ecommerce/shop/single/cards/master-card.jpg" alt="Mastercard" class="border rounded">
+              <a  class="d-inline-block mb-3 mr-xl-4 mr-3">
+                <img src="assets/img/master-card.jpg" alt="Mastercard" class="border rounded">
               </a>
-              <a href="#" class="d-inline-block mb-3">
-                <img src="../../assets/img/ecommerce/shop/single/cards/pay-pal.jpg" alt="PayPal" class="border rounded">
+              <a  class="d-inline-block mb-3">
+                <img src="assets/img/pay-pal.jpg" alt="PayPal" class="border rounded">
               </a>
             </div>
           </div>
@@ -282,53 +246,8 @@
       <div class="py-5" style="background-color: #e5e8ed;">
         <section  class="container my-lg-2 py-2 py-md-4" >
           <div class="row">
-            <div class="col-lg-7 col-md-8 mb-md-0 mb-4">
-              <h3 class="h5 mb-3">Details</h3>
-              <p>Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.</p>
-              <ul class="pl-3">
-                <li>Brand: Jordan</li>
-                <li>Color: gray / red / yellow</li>
-                <li>Mid-cut design</li>
-                <li>Lace-up fastening</li>
-                <li>Rubber outsole pods for durability and traction</li>
-                <li>Moulded grooves in forefoot offer added flexibility</li>
-                <li>Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon</li>
-              </ul>
-              <hr class="my-4">
-              <h3 class="h5 mb-3">Fabric</h3>
-              <ul class="pl-3">
-                <li>Upper: 50% real leather, 50% textile</li>
-                <li>Lining: 100% textile</li>
-                <li>Sole: 100% other materials</li>
-              </ul>
-              <hr class="my-4">
-              <h3 class="h5 mb-3">Care</h3>
-              <ul class="pl-0">
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/hand-wash.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    Hand wash only (30°)
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/no-ironing.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    No ironing
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/no-bleach.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    Do not use any bleach
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/no-tumble-dry.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    Do not tumble dry
-                  </div>
-                </li>
-              </ul>
+            <div class="col-lg-7 col-md-8 mb-md-0 mb-4" [innerHTML]="producto.contenido">
+           
             </div>
             <div class="col-md-4 offset-lg-1">
   
@@ -337,7 +256,9 @@
                 <div class="card-product-img">
                   <div class="cs-carousel cs-controls-onhover">
                     <a class="cs-carousel-inner">
-                      <div><img class="card-img-top" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Product image"></div>
+                      <div>
+                          <img class="card-img-top" [src]="url + 'obtener_portada/' + producto.portada" alt="Product image">
+                    </div>
                      
                     </a>
                   </div>
@@ -356,56 +277,19 @@
                 </div>
                 <div class="card-body pb-2" style="background-color: white;">
                   <h3 class="card-product-title text-truncate mb-2">
-                    <a href="#" class="nav-link">Basic hooded sweatshirt in pink</a>
+                    <a href="#" class="nav-link">{{producto.titulo}}</a>
                   </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block text-danger mb-0">$15.50</span>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="h5 d-inline-block text-danger mb-0">${{producto.precio}}</span>
                     <del class="d-inline-block ml-2 pl-1 text-muted">$31.00</del>
                   </div>
-                  <div class="d-flex align-items-center mb-2 pb-1">
-                    <div class="mt-n2">
-                      <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="size-01" id="l-1" checked>
-                        <label for="l-1" class="cs-custom-option-label">L</label>
-                      </div>
-                      <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="size-01" id="m-1">
-                        <label for="m-1" class="cs-custom-option-label">M</label>
-                      </div>
-                      <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="size-01" id="s-1">
-                        <label for="s-1" class="cs-custom-option-label">S</label>
-                      </div>
-                    </div>
-                    <div class="ml-auto">
-                      <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="color-01" id="beige-1" value="Beige" checked>
-                        <label for="beige-1" class="cs-custom-option-label">
-                          <span class="cs-color-swatch" style="background-color: #dead9c;"></span>
-                        </label>
-                      </div>
-                      <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="color-01" id="blue-1" value="Blue">
-                        <label for="blue-1" class="cs-custom-option-label">
-                          <span class="cs-color-swatch" style="background-color: #7998d1;"></span>
-                        </label>
-                      </div>
-                      <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="color-01" id="white-1" value="White">
-                        <label for="white-1" class="cs-custom-option-label">
-                          <span class="cs-color-swatch" style="background-color: #f4f4f4;"></span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-primary btn-block">
+                
+                  <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 1rem;">
                     <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                    Add to cart
+                    al Carrito
                   </button>
                 </div>
-                <div class="card-footer">
-                  
-                </div>
+               
               </div>
             </div>
           </div>
@@ -671,13 +555,15 @@
             </nav>
           </div>
           <div class="col-md-4 offset-lg-1">
-
+  
             <!-- Product card carousel -->
             <div class="card card-product">
               <div class="card-product-img">
                 <div class="cs-carousel cs-controls-onhover">
                   <a class="cs-carousel-inner">
-                    <div><img class="card-img-top" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Product image"></div>
+                    <div>
+                        <img class="card-img-top" [src]="url + 'obtener_portada/' + producto.portada" alt="Product image">
+                  </div>
                    
                   </a>
                 </div>
@@ -696,56 +582,19 @@
               </div>
               <div class="card-body pb-2" style="background-color: white;">
                 <h3 class="card-product-title text-truncate mb-2">
-                  <a href="#" class="nav-link">Basic hooded sweatshirt in pink</a>
+                  <a href="#" class="nav-link">{{producto.titulo}}</a>
                 </h3>
-                <div class="d-flex align-items-center">
-                  <span class="h5 d-inline-block text-danger mb-0">$15.50</span>
+                <div class="d-flex align-items-center mb-3">
+                  <span class="h5 d-inline-block text-danger mb-0">${{producto.precio}}</span>
                   <del class="d-inline-block ml-2 pl-1 text-muted">$31.00</del>
                 </div>
-                <div class="d-flex align-items-center mb-2 pb-1">
-                  <div class="mt-n2">
-                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="size-01" id="l-1" checked>
-                      <label for="l-1" class="cs-custom-option-label">L</label>
-                    </div>
-                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="size-01" id="m-1">
-                      <label for="m-1" class="cs-custom-option-label">M</label>
-                    </div>
-                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="size-01" id="s-1">
-                      <label for="s-1" class="cs-custom-option-label">S</label>
-                    </div>
-                  </div>
-                  <div class="ml-auto">
-                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="color-01" id="beige-1" value="Beige" checked>
-                      <label for="beige-1" class="cs-custom-option-label">
-                        <span class="cs-color-swatch" style="background-color: #dead9c;"></span>
-                      </label>
-                    </div>
-                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="color-01" id="blue-1" value="Blue">
-                      <label for="blue-1" class="cs-custom-option-label">
-                        <span class="cs-color-swatch" style="background-color: #7998d1;"></span>
-                      </label>
-                    </div>
-                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="color-01" id="white-1" value="White">
-                      <label for="white-1" class="cs-custom-option-label">
-                        <span class="cs-color-swatch" style="background-color: #f4f4f4;"></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-block">
+              
+                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 1rem;">
                   <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                  Add to cart
+                  al Carrito
                 </button>
               </div>
-              <div class="card-footer">
-                
-              </div>
+             
             </div>
           </div>
         </div>
