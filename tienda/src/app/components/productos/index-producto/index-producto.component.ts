@@ -9,7 +9,7 @@ declare var $:any;
   selector: 'app-index-producto',
   templateUrl: './index-producto.component.html',
   styleUrls: ['./index-producto.component.css']
-})
+}) 
 export class IndexProductoComponent implements OnInit {
 
   public config_global: any = {};
@@ -30,7 +30,7 @@ export class IndexProductoComponent implements OnInit {
     private _route: ActivatedRoute
   ) {
     this.url = GLOBAL.url;
-    this._clienteService.obtener_config_publico().subscribe(
+    this._clienteService.obtener_config_publico().subscribe( 
       response=>{
         this.config_global = response.data;
       }

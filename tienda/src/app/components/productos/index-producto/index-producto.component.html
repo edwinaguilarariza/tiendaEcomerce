@@ -51,7 +51,7 @@
                   <option value="21">21</option>
                   <option value="28">28</option>
                 </select>
-                <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-lg-block">productos por pagina</span> 
+                <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-lg-block">productos por pagina</span>  
               </div>
               <ngb-pagination
               [(page)]="page"
@@ -218,7 +218,7 @@
                   <h3 class="h6 mb-2 text-uppercase">No se encontraron productos</h3>
                   <h2 class="h1 pb-lg-3">Es posible que sea un error</h2>
                  
-                  <a style="cursor: pointer;" class="btn btn-gradient btn-hover-shadow" (click)="reset_productos()">Mostrar todos los productos</a>
+                  <a style="cursor: pointer;" class="btn btn-gradient btn-hover-shadow" (click)="reset_productos()">Mostrar todos los productos</a> 
               </div>
               </ng-container>
 
@@ -226,7 +226,7 @@
                 <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let item of productos | slice: ( page-1 ) * pageSize : ( page -1 ) * pageSize + pageSize;">
                   <div class="card card-product mx-auto">
                     <div class="card-product-img">
-                      <a href="shop-single.html" class="card-img-top">
+                      <a [routerLink]="['/productos/',item.slug]" routerLinkActive="router-link-active"  class="card-img-top">
                         <img [src]="url + 'obtener_portada/' + item.portada" alt="Product image">
                       </a>
                       <div class="card-product-widgets-top">
@@ -244,7 +244,7 @@
                     </div>
                     <div class="card-body pb-2">
                       <h3 class="card-product-title text-truncate mb-2">
-                        <a href="shop-single.html" class="nav-link">{{item.titulo}}</a>
+                        <a [routerLink]="['/productos/',item.slug]" class="nav-link">{{item.titulo}}</a>
                       </h3>
                       <div class="d-flex align-items-center">
                         <span class="h5 d-inline-block mb-0">{{item.precio}}</span>
@@ -303,3 +303,6 @@
         </div>
       </section>
 </main>
+
+
+<app-footer></app-footer>
