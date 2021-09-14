@@ -20,6 +20,11 @@ export class GuestService {
  }
  
 
+ listar_productos_recomendados_publico(categoria: any ):Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type', 'application/json' ); 
+      return this._http.get(this.url+'listar_productos_recomendados_publico/'+categoria,{headers:headers} );
+}
+
 }
 
 

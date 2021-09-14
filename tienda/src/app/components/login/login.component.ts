@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   login(loginForm:any){
     if (loginForm.valid) {
-      // console.log(this.user);
+      
  
        let data = {
          email: this.user.email,
@@ -63,10 +63,10 @@ export class LoginComponent implements OnInit {
             
 
            }
-           console.log(response);
+           
        },
        error =>{
-           console.log(error);
+           
        }
        
        );

@@ -14,6 +14,8 @@ export class ShowProductoComponent implements OnInit {
   public slug:any;
   public producto : any ={};
   public url;
+  public productos_rec : Array<any> = [];
+  public carrito_data :any = {};
 
   constructor( private _route :ActivatedRoute ,
                private _guestService : GuestService   ) {
@@ -25,6 +27,12 @@ export class ShowProductoComponent implements OnInit {
         this._guestService.obtener_productos_slug_publico(this.slug).subscribe(
           response=>{
             this.producto = response.data;
+            this._guestService.listar_productos_recomendados_publico(this.producto.categoria).subscribe(
+              response=>{
+                this.productos_rec = response.data;
+                
+              }
+            )
             
           }
         )
@@ -38,7 +46,7 @@ export class ShowProductoComponent implements OnInit {
     setTimeout(() => {
       tns({
         container: '.cs-carousel-inner',
-        controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'],
+        controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'], 
         navPosition: "top",
         controlsPosition: "top",
         mouseDrag: !0,
@@ -57,11 +65,6 @@ export class ShowProductoComponent implements OnInit {
       }
     }
   
-    },500);
-
-    
-    
-
     tns({
       container: '.cs-carousel-inner-two',
       controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'],
@@ -72,7 +75,7 @@ export class ShowProductoComponent implements OnInit {
       autoplayHoverPause: !0,
       autoplayButtonOutput: !1,
       nav: false,
-      controlsContainer: "#custom-controls-related",
+      controlsContainer: "#custom-controls-related", 
       responsive: {
         0: {
           items: 1,
@@ -93,6 +96,13 @@ export class ShowProductoComponent implements OnInit {
       }
     });
 
-  }
+    },500);
 
+  }
+    
 }
+    
+
+    
+
+

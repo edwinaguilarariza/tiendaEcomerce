@@ -603,7 +603,7 @@
       <section class="py-5" style="background-color: #e5e8ed;">
         <div class="container my-lg-2 py-2 py-md-4">
           <div class="d-flex align-items-center justify-content-between pb-sm-1 mb-5">
-            <h2 class="h1 pr-3 mb-0">You may be interested in</h2>
+            <h2 class="h1 pr-3 mb-0">Productos recomendados</h2>
             <div class="tns-custom-controls cs-controls-inverse" id="custom-controls-related" tabindex="0">
               <button type="button" data-controls="prev" tabindex="-1">
                 <i class="cxi-arrow-left"></i>
@@ -614,137 +614,32 @@
             </div>
           </div>
           <div class="cs-carousel pb-2">
-            <div class="cs-carousel-inner-two" data-carousel-options=''>
+            <div class="cs-carousel-inner-two" data-carousel-options=''> 
 
               <!-- Item -->
-              <div>
+              <div *ngFor="let item of productos_rec" >
                 <div class="card card-product mx-auto">
                   <div class="card-product-img">
-                    <a href="#" class="card-img-top">
-                      <img src="https://createx.createx.studio/assets/img/ecommerce/shop/01.jpg" alt="Product image">
+                    <a  [routerLink]="['/productos/',item.slug]" target="_blank" class="card-img-top">
+                      <img  [src]="url + 'obtener_portada/' + item.portada"  alt="Product image">
                     </a>
                     <div class="card-product-widgets-bottom">
-                      <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
+                      <a  [routerLink]="['/productos/',item.slug]" target="_blank" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
                     </div>
                   </div>
                   <div class="card-body bg-0 pb-2">
                     <h3 class="card-product-title text-truncate mb-2">
-                      <a href="#" class="nav-link">Metal bridge sunglasses</a>
+                      <a  [routerLink]="['/productos/',item.slug]" target="_blank" class="nav-link">{{item.titulo}}</a>
                     </h3>
                     <div class="d-flex align-items-center">
-                      <span class="h5 d-inline-block mb-0">$89.95</span>
+                      <span class="h5 d-inline-block mb-0">${{item.precio}}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Item -->
-              <div>
-                <div class="card card-product mx-auto">
-                  <div class="card-product-img">
-                    <a href="#" class="card-img-top">
-                      <img src="https://createx.createx.studio/assets/img/ecommerce/shop/01.jpg" alt="Product image">
-                    </a>
-                    <div class="card-product-widgets-bottom">
-                      <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                    </div>
-                  </div>
-                  <div class="card-body bg-0 pb-2">
-                    <h3 class="card-product-title text-truncate mb-2">
-                      <a href="#" class="nav-link">Mid-rise slim cropped fit jeans</a>
-                    </h3>
-                    <div class="d-flex align-items-center">
-                      <span class="h5 d-inline-block mb-0">$40.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Item -->
-              <div>
-                <div class="card card-product mx-auto">
-                  <div class="card-product-img">
-                    <a href="#" class="card-img-top">
-                      <img src="https://createx.createx.studio/assets/img/ecommerce/shop/01.jpg" alt="Product image">
-                    </a>
-                    <div class="card-product-widgets-top">
-                      <span class="badge product-badge badge-danger">-50%</span>
-                      <div class="star-rating ml-auto">
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star"></i>
-                      </div>
-                    </div>
-                    <div class="card-product-widgets-bottom">
-                      <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                    </div>
-                  </div>
-                  <div class="card-body bg-0 pb-2">
-                    <h3 class="card-product-title text-truncate mb-2">
-                      <a href="shop-single.html" class="nav-link">Leather crossbody bag with chain lace</a>
-                    </h3>
-                    <div class="d-flex align-items-center">
-                      <span class="h5 d-inline-block text-danger mb-0">$89.50</span>
-                      <del class="d-inline-block ml-2 pl-1 text-muted">$179.00</del>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Item -->
-              <div>
-                <div class="card card-product mx-auto">
-                  <div class="card-product-img">
-                    <a href="#" class="card-img-top">
-                      <img src="https://createx.createx.studio/assets/img/ecommerce/shop/01.jpg" alt="Product image">
-                    </a>
-                    <div class="card-product-widgets-top">
-                      <div class="star-rating ml-auto">
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                        <i class="sr-star cxi-star-filled active"></i>
-                      </div>
-                    </div>
-                    <div class="card-product-widgets-bottom">
-                      <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                    </div>
-                  </div>
-                  <div class="card-body bg-0 pb-2">
-                    <h3 class="card-product-title text-truncate mb-2">
-                      <a href="#" class="nav-link">Shirt with insertion lace trims</a>
-                    </h3>
-                    <div class="d-flex align-items-center">
-                      <span class="h5 d-inline-block mb-0">$49.95</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Item -->
-              <div>
-                <div class="card card-product mx-auto">
-                  <div class="card-product-img">
-                    <a href="#" class="card-img-top">
-                      <img src="https://createx.createx.studio/assets/img/ecommerce/shop/01.jpg" alt="Product image">
-                    </a>
-                    <div class="card-product-widgets-bottom">
-                      <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                    </div>
-                  </div>
-                  <div class="card-body bg-0 pb-2">
-                    <h3 class="card-product-title text-truncate mb-2">
-                      <a href="#" class="nav-link">Chrono watch with gold rim and blue strap</a>
-                    </h3>
-                    <div class="d-flex align-items-center">
-                      <span class="h5 d-inline-block mb-0">$120.60</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
+ 
             </div>
           </div>
         </div>
