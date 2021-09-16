@@ -5,6 +5,7 @@ import { GLOBAL } from 'src/app/services/GLOBAL';
 declare var noUiSlider: any ;
 //declare var jQuery: any;
 declare var $:any;
+declare var iziToast: any;
 @Component({
   selector: 'app-index-producto',
   templateUrl: './index-producto.component.html',
@@ -18,17 +19,25 @@ export class IndexProductoComponent implements OnInit {
   public filter_producto = '' ;
   public url ;
   public filter_cat_productos = 'todos';
+  
 
+  public token;
   public load_data = true;
   public route_categoria : any;
   public page = 1;
   public pageSize = 15;
   public sort_by = 'Defecto';
+  public carrito_data :any = {
+    variedad:'',
+    cantidad: 1
+  };
+  public btn_cart = false;
 
   constructor(
     private _clienteService: ClienteService,
     private _route: ActivatedRoute
   ) {
+    this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
     this._clienteService.obtener_config_publico().subscribe( 
       response=>{
@@ -238,5 +247,44 @@ export class IndexProductoComponent implements OnInit {
           });  
       }
     }
+
+    agregar_producto(producto:any){
+      let data = {
+        producto:producto._id,
+        cliente: localStorage.getItem('id'),
+        cantidad: 1,
+        variedad: producto.variedades[0].titulo,
+      }
+      this.btn_cart = true;
+      this._clienteService.agregar_carrito_cliente(data,this.token).subscribe(  
+        response=>{
+          console.log(response);
+          
+         if (response.data == undefined) {
+          iziToast.show({
+            title:'Error',
+            titleColor:'#FF0000',
+            color: '#FFF',
+            class: 'text-danger',
+            position:'topRight',
+            message: 'El producto ya existe en el carrito'
+          })
+          this.btn_cart = false;
+         } else {
+          console.log(response);
+          iziToast.show({
+            title:'SUCCESS',
+            titleColor:'#1DC74C',
+            color: '#FFF',
+            class: 'text-success',
+            position:'topRight',
+            message:'se agrego el producto al carrito'
+          });
+          this.btn_cart = false;
+         }
+        }
+      )
+    }
+
         
   }

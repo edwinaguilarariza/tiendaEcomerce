@@ -218,7 +218,7 @@
                   <h3 class="h6 mb-2 text-uppercase">No se encontraron productos</h3>
                   <h2 class="h1 pb-lg-3">Es posible que sea un error</h2>
                  
-                  <a style="cursor: pointer;" class="btn btn-gradient btn-hover-shadow" (click)="reset_productos()">Mostrar todos los productos</a> 
+                  <a style="cursor: pointer;" class="btn btn-gradient btn-hover-shadow" (click)="reset_productos()">Mostrar todos los productos</a>  
               </div>
               </ng-container>
 
@@ -258,9 +258,13 @@
                           </div>
                         </div>
                       </div>
-                      <button type="button" class="btn btn-primary btn-block"> 
+                      <button  *ngIf="!btn_cart" type="button" class="btn btn-primary btn-block" (click)="agregar_producto(item)"> 
                         <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                        Add to cart
+                        Al carrito
+                      </button>
+                      <button *ngIf="btn_cart" type="button" class="btn btn-primary btn_block" disabled>
+                        <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                        Agregando...
                       </button>
                     </div>
                   </div>
