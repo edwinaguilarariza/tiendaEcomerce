@@ -26,7 +26,7 @@ export class PerfilComponent implements OnInit {
     if (this.id) {
       this._clienteService.obtener_cliente_guest(this.id,this.token).subscribe(
         response=>{
-          console.log(response);
+         // console.log(response);
           this.cliente = response.data;
           
         }

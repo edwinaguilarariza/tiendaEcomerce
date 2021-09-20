@@ -41,123 +41,38 @@
                 <h2 class="h4 mb-4">1. Order Review</h2>
                 <div class="bg-secondary rounded mb-5">
                   <!-- Item -->
-                  <div class="media px-2 px-sm-4 py-4 border-bottom">
+                  <div class="media px-2 px-sm-4 py-4 border-bottom" *ngFor="let item of carrito_arr">
                     <a href="shop-single.html" style="min-width: 80px;">
-                      <img src="../../assets/img/ecommerce/cart/01.png" width="80" alt="Product thumb">
+                      <img [src]="url + 'obtener_portada/' + item.producto.portada" width="80" alt="Product thumb">
                     </a>
                     <div class="media-body w-100 pl-3">
                       <div class="d-sm-flex">
                         <div class="pr-sm-3 w-100" style="max-width: 16rem;">
                           <h3 class="font-size-sm mb-3">
-                            <a href="shop-single.html" class="nav-link font-weight-bold">Basic hooded sweatshirt in pink</a>
+                            <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
                           </h3>
                           <ul class="list-unstyled font-size-xs mt-n2 mb-2">
-                            <li class="mb-0"><span class="text-muted">Color:</span> Pink</li>
-                            <li class="mb-0"><span class="text-muted">Size:</span> S</li>
+                            <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedades}}</span> {{item.variedad}}</li>
                           </ul>
                         </div>
                         <div class="d-flex pr-sm-3">
-                          <input type="number" class="form-control form-control-sm bg-light mr-3" style="width: 4.5rem;" value="1">
-                          <div class="text-nowrap pt-2"><strong class="text-danger">$15.00</strong> <s class="font-size-xs text-muted">$31.00</s></div>
+                          <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
+                          <div class="text-nowrap pt-2">
+                            <!-- <strong class="text-danger">$15.00</strong> -->
+                            <span style="font-size:1.2rem !important;" class="font-size-xs text-muted">${{item.producto.precio}}</span>
+                            </div>
                         </div>
                         <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
-                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0">Delete</button>
+                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0">Eliminar</button>
                           <button class="btn btn-link btn-sm text-decoration-none pt-0 pt-sm-2 px-0 pb-0 mt-0 mt-sm-1">
-                            Move to
+                            Mover a
                             <i class="cxi-heart ml-1"></i>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- Item -->
-                  <div class="media px-2 px-sm-4 py-4 border-bottom">
-                    <a href="shop-single.html" style="min-width: 80px;">
-                      <img src="../../assets/img/ecommerce/cart/02.png" width="80" alt="Product thumb">
-                    </a>
-                    <div class="media-body w-100 pl-3">
-                      <div class="d-sm-flex">
-                        <div class="pr-sm-3 w-100" style="max-width: 16rem;">
-                          <h3 class="font-size-sm mb-3">
-                            <a href="shop-single.html" class="nav-link font-weight-bold">Black and white sport cap</a>
-                          </h3>
-                        </div>
-                        <div class="d-flex pr-sm-3">
-                          <input type="number" class="form-control form-control-sm bg-light mr-3" style="width: 4.5rem;" value="1">
-                          <div class="text-nowrap pt-2"><strong>$18.15</strong></div>
-                        </div>
-                        <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
-                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0">Delete</button>
-                          <button class="btn btn-link btn-sm text-decoration-none pt-0 pt-sm-2 px-0 pb-0 mt-0 mt-sm-1">
-                            Move to
-                            <i class="cxi-heart ml-1"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Item -->
-                  <div class="media px-2 px-sm-4 py-4 border-bottom">
-                    <a href="shop-single.html" style="min-width: 80px;">
-                      <img src="../../assets/img/ecommerce/cart/03.png" width="80" alt="Product thumb">
-                    </a>
-                    <div class="media-body w-100 pl-3">
-                      <div class="d-sm-flex">
-                        <div class="pr-sm-3 w-100" style="max-width: 16rem;">
-                          <h3 class="font-size-sm mb-3">
-                            <a href="shop-single.html" class="nav-link font-weight-bold">Mid-rise slim cropped fit jeans</a>
-                          </h3>
-                          <ul class="list-unstyled font-size-xs mt-n2 mb-2">
-                            <li class="mb-0"><span class="text-muted">Size:</span> M</li>
-                          </ul>
-                        </div>
-                        <div class="d-flex pr-sm-3">
-                          <input type="number" class="form-control form-control-sm bg-light mr-3" style="width: 4.5rem;" value="1">
-                          <div class="text-nowrap pt-2"><strong>$76.00</strong></div>
-                        </div>
-                        <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
-                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0">Delete</button>
-                          <button class="btn btn-link btn-sm text-decoration-none pt-0 pt-sm-2 px-0 pb-0 mt-0 mt-sm-1">
-                            Move to
-                            <i class="cxi-heart ml-1"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Item -->
-                  <div class="media px-2 px-sm-4 py-4 border-bottom">
-                    <a href="shop-single.html" style="min-width: 80px;">
-                      <img src="../../assets/img/ecommerce/cart/04.png" width="80" alt="Product thumb">
-                    </a>
-                    <div class="media-body w-100 pl-3">
-                      <div class="d-sm-flex">
-                        <div class="pr-sm-3 w-100" style="max-width: 16rem;">
-                          <h3 class="font-size-sm mb-3">
-                            <a href="shop-single.html" class="nav-link font-weight-bold">Men fashion gray shoes</a>
-                          </h3>
-                          <ul class="list-unstyled font-size-xs mt-n2 mb-2">
-                            <li class="mb-0"><span class="text-muted">Color:</span> Gray</li>
-                            <li class="mb-0"><span class="text-muted">Size:</span> 10.5</li>
-                          </ul>
-                        </div>
-                        <div class="d-flex pr-sm-3">
-                          <input type="number" class="form-control form-control-sm bg-light mr-3" style="width: 4.5rem;" value="1">
-                          <div class="text-nowrap pt-2"><strong>$84.00</strong></div>
-                        </div>
-                        <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
-                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0">Delete</button>
-                          <button class="btn btn-link btn-sm text-decoration-none pt-0 pt-sm-2 px-0 pb-0 mt-0 mt-sm-1">
-                            Move to
-                            <i class="cxi-heart ml-1"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="px-3 px-sm-4 py-4 text-right">
-                    <span class="text-muted">Subtotal:<strong class="text-dark font-size-lg ml-2">$198.65</strong></span>
-                  </div>
+                
                 </div>
     
                 <!-- Adresses -->
@@ -395,7 +310,7 @@
                           <span class="font-weight-bold">Subtotal:</span>
                           <span class="font-weight-bold">$198.65</span>
                         </li>
-                        <li class="d-flex justify-content-between mb-2">
+                        <li class="d-flex justify-content-between mb-2"> 
                           <span>Shipping costs:</span>
                           <span>$25.00</span>
                         </li>

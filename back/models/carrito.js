@@ -8,7 +8,7 @@ var CarritoSchema = Schema({
     cliente: {type: Schema.ObjectId, ref: 'cliente', required:true },
     cantidad: {type: Number, required: true},
     variedad: {type: String, required:true},
-    createdAt:{ type:Date,default:Date.now, required: true }
+    createdAt:{ type:Date,default:Date.now, required: true },
 });
    
 

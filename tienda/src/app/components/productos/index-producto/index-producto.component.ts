@@ -80,7 +80,7 @@ export class IndexProductoComponent implements OnInit {
       
 
   ngOnInit(): void {
-    var slider : any = document.getElementById('slider');
+    let slider : any = document.getElementById('slider');
     noUiSlider.create(slider, {
         start: [0, 1000],
         connect: true,

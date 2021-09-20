@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { GLOBAL } from 'src/app/services/GLOBAL';
 declare var $:any;
+
 
 @Component({
   selector: 'app-nav',
@@ -17,6 +19,9 @@ export class NavComponent implements OnInit {
   public config_global: any = {};
   public op_cart  = false;
   
+  public carrito_arr : Array<any> = [];
+  public url;
+  public subtotal = 0 ;
 
 
   constructor( private _clienteService: ClienteService ,
@@ -24,24 +29,32 @@ export class NavComponent implements OnInit {
     ) {
     this.token = localStorage.getItem('token');
     this.id = localStorage.getItem('id');
+    this.url = GLOBAL.url;
 
-    this._clienteService.obtener_config_publico().subscribe(
+    this._clienteService.obtener_config_publico().subscribe( 
       response=>{
         this.config_global = response.data;
         
       }
     )
     
-      if (this.token) {
+      if(this.token) {
         this._clienteService.obtener_cliente_guest(this.id ,this.token).subscribe(    
           response=>{
-    
+            
             this.user = response.data;
             
             localStorage.setItem('user_data',JSON.stringify(this.user)); 
             if (localStorage.getItem('user_data')) {
               this.user_lc = localStorage.getItem('user_data');
-              
+            
+              this._clienteService.obtener_carrito_cliente(this.id,this.token).subscribe(
+                response=>{
+                  this.carrito_arr = response.data;
+                  this.calcular_carrito();
+                  //console.log(response);
+                }
+              )
              }else{
                this.user_lc = undefined;
              }
@@ -52,9 +65,13 @@ export class NavComponent implements OnInit {
           }
         )
       }
+        
+    }
+              
+              
+              
 
 
-   }
 
   
    ngOnInit(): void {
@@ -76,6 +93,12 @@ export class NavComponent implements OnInit {
       this.op_cart = false;
       $('#cart').removeClass('show');
      }
+   }
+
+   calcular_carrito(){
+     this.carrito_arr.forEach(element =>{
+       this.subtotal = this.subtotal + parseInt(element.producto.precio);
+     })
    }
 
     
