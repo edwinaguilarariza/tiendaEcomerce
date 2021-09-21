@@ -200,14 +200,14 @@
     <div class="cs-offcanvas-body">
       <!-- Item -->
       <div class="media p-4 border-bottom mx-n4" *ngFor="let item of carrito_arr">
-        <a href="shop-single.html" style="min-width: 80px;">
+        <a [routerLink]="['/productos/',item.producto.slug]" target="_blank" style="min-width: 80px;">
           <img [src]="url + 'obtener_portada/' + item.producto.portada" width="80" alt="Product thumb">
         </a>
         <div class="media-body pl-3">
           <div class="d-flex justify-content-between">
             <div class="pr-2">
               <h3 class="font-size-sm mb-3">
-                <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
+                <a [routerLink]="['/productos/',item.producto.slug]" target="_blank" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
               </h3>
               <ul class="list-unstyled font-size-xs mt-n2 mb-2">
                 <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedades}}</span> {{item.variedad}}</li>

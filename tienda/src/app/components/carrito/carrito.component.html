@@ -22,7 +22,7 @@
               <div class="col-lg-8 pr-lg-6">
                 <div class="d-flex align-items-center justify-content-between pb-2 mb-4">
                   <h1 class="mb-0">Checkout</h1>
-                  <a href="shop-catalog.html"><strong>Back to shopping</strong></a>
+                  <a [routerLink]="['/productos']" routerLinkActive="router-link-active" ><strong>Regresar a la tienda</strong></a>
                 </div>
     
                 <!-- Alert -->
@@ -38,18 +38,18 @@
                 <hr class="border-top-0 border-bottom pt-2 mb-4">
     
                 <!-- Order review -->
-                <h2 class="h4 mb-4">1. Order Review</h2>
+                <h2 class="h4 mb-4">1. Detalles de orden</h2>
                 <div class="bg-secondary rounded mb-5">
                   <!-- Item -->
                   <div class="media px-2 px-sm-4 py-4 border-bottom" *ngFor="let item of carrito_arr">
-                    <a href="shop-single.html" style="min-width: 80px;">
+                    <a [routerLink]="['/productos/',item.producto.slug]" style="min-width: 80px;">
                       <img [src]="url + 'obtener_portada/' + item.producto.portada" width="80" alt="Product thumb">
                     </a>
                     <div class="media-body w-100 pl-3">
                       <div class="d-sm-flex">
                         <div class="pr-sm-3 w-100" style="max-width: 16rem;">
                           <h3 class="font-size-sm mb-3">
-                            <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
+                            <a [routerLink]="['/productos/',item.producto.slug]"  class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
                           </h3>
                           <ul class="list-unstyled font-size-xs mt-n2 mb-2">
                             <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedades}}</span> {{item.variedad}}</li>
@@ -308,27 +308,24 @@
                       <ul class="list-unstyled border-bottom mb-0 p-4">
                         <li class="d-flex justify-content-between mb-2">
                           <span class="font-weight-bold">Subtotal:</span>
-                          <span class="font-weight-bold">$198.65</span>
+                          <span class="font-weight-bold">${{subtotal}}</span>
                         </li>
                         <li class="d-flex justify-content-between mb-2"> 
-                          <span>Shipping costs:</span>
+                          <span>Envio:</span>
                           <span>$25.00</span>
                         </li>
                         <li class="d-flex justify-content-between mb-2">
-                          <span>Discount:</span>
+                          <span>Descuento:</span>
                           <span>&mdash;</span>
                         </li>
-                        <li class="d-flex justify-content-between">
-                          <span>Estimated sales tax:</span>
-                          <span>$6.35</span>
-                        </li>
+                        
                       </ul>
                       <div class="d-flex justify-content-between p-4">
                         <span class="h5 mb-0">Order total:</span>
-                        <span class="h5 mb-0">$230.00</span>
+                        <span class="h5 mb-0">${{total_pagar}}</span>
                       </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Complete order</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Completar Orden</button>
                   </div>
                 </div>
               </aside>

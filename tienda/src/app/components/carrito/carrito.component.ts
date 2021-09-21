@@ -15,6 +15,7 @@ export class CarritoComponent implements OnInit {
   public carrito_arr : Array<any> = [];
   public url;
   public subtotal = 0 ;
+  public total_pagar = 0;
 
   constructor(
     private _clienteService: ClienteService
@@ -38,6 +39,7 @@ export class CarritoComponent implements OnInit {
     this.carrito_arr.forEach(element =>{
       this.subtotal = this.subtotal + parseInt(element.producto.precio);
     })
+    this.total_pagar = this.subtotal;
   }
 
 }
