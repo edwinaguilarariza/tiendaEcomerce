@@ -7,6 +7,23 @@ var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 4201;
 
+var server = require('http').createServer(app);
+var io = require('socket.io')(server,{
+    cors:{origin: '*'}
+});
+
+io.on('connection',function(socket){
+    socket.on('delete-carrito',function(data){
+        io.emit('new-carrito',data);
+        console.log(data);
+    });
+
+    socket.on('add-carrito-add',function(data){
+        io.emit('new-carrito-add',data);
+        console.log(data);
+    });
+});
+
 
 var cliente_route = require('./routes/cliente');
 var admin_route = require('./routes/admin');
@@ -23,7 +40,7 @@ mongoose.connect
         console.log(err);
     }else{
         
-        app.listen(port,function(){
+        server.listen(port,function(){
             console.log('servidor corriendo en el puerto ' + port);
         });
     }

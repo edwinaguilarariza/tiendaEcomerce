@@ -38,7 +38,7 @@
                 <hr class="border-top-0 border-bottom pt-2 mb-4">
     
                 <!-- Order review -->
-                <h2 class="h4 mb-4">1. Detalles de orden</h2>
+                <h2 class="h4 mb-4">1. Detalles de orden</h2> 
                 <div class="bg-secondary rounded mb-5">
                   <!-- Item -->
                   <div class="media px-2 px-sm-4 py-4 border-bottom" *ngFor="let item of carrito_arr">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
-                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0">Eliminar</button>
+                          <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0" (click)="eliminar_item(item._id)">Eliminar</button>
                           <button class="btn btn-link btn-sm text-decoration-none pt-0 pt-sm-2 px-0 pb-0 mt-0 mt-sm-1">
                             Mover a
                             <i class="cxi-heart ml-1"></i>

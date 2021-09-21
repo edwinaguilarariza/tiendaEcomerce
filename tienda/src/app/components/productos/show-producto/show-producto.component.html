@@ -103,7 +103,7 @@
               <div class="col-sm-8 order-sm-1 order-2">
                 <div class="form-group">
                   <label for="size">{{producto.variedades}}</label>
-                  <select class="form-control custom-select" id="size" name="variedad" [(ngModel)]="carrito_data.variedad">
+                  <select class="form-control custom-select" id="size" name="variedad" [(ngModel)]="carrito_data.variedad"> 
                     <option value="" selected disabled>Seleccionar</option>
                     <option  value="{{item.titulo}}" *ngFor="let item of producto.variedades">{{item.titulo}}</option>
                    
