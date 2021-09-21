@@ -61,7 +61,7 @@
             <li class="nav-item align-self-center mb-0" *ngIf="user_lc != undefined">
               <a style="cursor: pointer;" class="nav-tool pr-lg-0" (click)="op_modalcart()">
                 <i class="cxi-cart nav-tool-icon"></i>
-                <span class="badge badge-success align-middle mt-n1 ml-2 px-2 py-1 font-size-xs">4</span>
+                <span class="badge badge-success align-middle mt-n1 ml-2 px-2 py-1 font-size-xs">{{carrito_arr.length}}</span>
               </a>
             </li>
             
@@ -226,7 +226,9 @@
               </button>
             </div>
             <div class="nav-muted mr-n2">
-              <a href="#" class="nav-link px-2 mt-n2" data-toggle="tooltip" title="" data-original-title="Remove"><i class="cxi-delete"></i></a>
+              <a  class="nav-link px-2 mt-n2"  title="Quitar" style="cursor: pointer;" (click)="eliminar_item(item._id)">
+                <i class="cxi-delete"></i>
+              </a>
             </div>
           </div>
         </div>
