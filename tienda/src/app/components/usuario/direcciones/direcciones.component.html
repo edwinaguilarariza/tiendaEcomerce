@@ -34,10 +34,10 @@
               </a> -->
             </div>
             
-            <form action="">
+            <form #registroForm="ngForm" (ngSubmit)="registrar(registroForm)">
                 <div class="row mb-3">
                     <div class="col-sm-6 form-group">
-                        <label for="ac-fn">Nombres</label>
+                        <label for="ac-fn">Destinatario</label>
                         <input type="text"  required class="form-control form-control-lg" name="destinatario"   [(ngModel)]="direccion.destinatario" placeholder="Nombres completos">
                       </div>
                     <div class="col-sm-6 form-group">
@@ -54,11 +54,11 @@
                     </div>
                     <div class="col-sm-12 form-group">
                         <label for="ac-fn">Direccion</label>
-                        <textarea  class="form-control"  placeholder="Direccion" name="direccion"  [(ngModel)]="direccion.direccion"   rows="3"></textarea>
+                        <textarea  required class="form-control"  placeholder="Direccion" name="direccion"  [(ngModel)]="direccion.direccion"   rows="3"></textarea>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="ac-fn">Pais</label>
-                        <select name="pais"   [(ngModel)]="direccion.pais" class="custom-select custom-select-lg" (change)="select_pais()">
+                        <select name="pais"  required [(ngModel)]="direccion.pais" class="custom-select custom-select-lg" (change)="select_pais()">
                             <option value="" selected disabled>Seleccionar</option>
                             <option value="Argentina">Argentina</option>
                             <option value="Bolivia">Bolivia</option>
