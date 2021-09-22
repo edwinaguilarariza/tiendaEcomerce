@@ -91,6 +91,8 @@ registro_direccion_cliente( data: any ,token: any):Observable<any>{
   return this._http.post(this.url+'registro_direccion_cliente',data,{headers:headers});
 }
 
+
+
 }
   
 

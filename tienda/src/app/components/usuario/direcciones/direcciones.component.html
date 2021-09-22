@@ -58,26 +58,51 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="ac-fn">Pais</label>
-                        <select name="pais"   [(ngModel)]="direccion.pais" class="custom-select custom-select-lg">
+                        <select name="pais"   [(ngModel)]="direccion.pais" class="custom-select custom-select-lg" (change)="select_pais()">
                             <option value="" selected disabled>Seleccionar</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="España">España</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Haití">Haití</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="México">México</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Panamá">Panamá</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Perú">Perú</option>
+                            <option value="República Dominican">República Dominican</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Venezuela">Venezuela</option>
                         </select>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="ac-fn">Region</label>
-                        <select name="region"   [(ngModel)]="direccion.region" class="custom-select custom-select-lg" disabled>
+                        <select id="sl-region" name="region"   [(ngModel)]="direccion.region" class="custom-select custom-select-lg" disabled (change)="select_region()">
                             <option value="" selected disabled>Seleccionar</option>
+                            <option value="{{item.id}}" *ngFor="let item of regiones">{{item.name}}</option>
                         </select>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="ac-fn">Provincia</label>
-                        <select name="provincia"   [(ngModel)]="direccion.provincia" class="custom-select custom-select-lg" disabled>
+                        <select id="sl-provincia" name="provincia"   [(ngModel)]="direccion.provincia" class="custom-select custom-select-lg" disabled (change)="select_provincia()">
                             <option value="" selected disabled>Seleccionar</option>
+                            <option value="{{item.id}}" *ngFor="let item of provincias">{{item.name}}</option>
                         </select>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="ac-fn">Distrito</label>
-                        <select name="distrito"   [(ngModel)]="direccion.distrito" class="custom-select custom-select-lg" disabled>
+                        <select id="sl-distrito" name="distrito"   [(ngModel)]="direccion.distrito" class="custom-select custom-select-lg" disabled>
                             <option value="" selected disabled>Seleccionar</option>
+                            <option value="{{item.id}}" *ngFor="let item of distritos">{{item.name}}</option>
                         </select>
                     </div>
                     <div  class="col-sm-12 form-group">
