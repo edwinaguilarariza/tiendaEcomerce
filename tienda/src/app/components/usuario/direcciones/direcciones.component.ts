@@ -218,5 +218,24 @@ export class DireccionesComponent implements OnInit {
   }
 
 
+  establecer_principal(id: any){
+    this._cienteService.cambiar_direccion_principal_cliente(id,localStorage.getItem('_id'),this.token).subscribe(
+      response=>{
+        
+        
+        iziToast.show({
+          title:'Error',
+          titleColor:'#FF0000',
+          color: '#FFF',
+          class: 'text-danger',
+          position:'topRight',
+          message:'se actualizo la direccion principal'
+        })
+        this.obtener_direccion();
+      }
+    )
+  }
+
+
 }
  

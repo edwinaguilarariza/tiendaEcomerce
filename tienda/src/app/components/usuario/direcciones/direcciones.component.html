@@ -134,7 +134,7 @@
                                       <span class="d-block mb-3 fs-sm text-muted">{{item.zip}}</span>
                                       
                                         <a  class="badge bg-primary" *ngIf="item.principal">Direccion de envio</a> 
-                                        <a  class="badge bg-success" style="cursor: pointer;" *ngIf="!item.principal">Establecer direccion principal</a> 
+                                        <a  class="badge bg-success" style="cursor: pointer;" *ngIf="!item.principal" (click)="establecer_principal(item._id)">Establecer direccion principal</a> 
                                       
                                     </div>
                                     <div class="col">
