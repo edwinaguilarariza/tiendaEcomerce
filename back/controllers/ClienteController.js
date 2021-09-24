@@ -301,7 +301,7 @@ const registro_direccion_cliente = async function(req,res){
             let id = req.params['id'];
             let cliente = req.params['cliente'];
     
-            let direcciones = await Direccion.find({cliente:cliente});
+            let  direcciones = await Direccion.find({cliente:cliente});
 
             direcciones.forEach(async element =>{
                 await Direccion.findByIdAndUpdate({_id:element._id},{principal:false});
