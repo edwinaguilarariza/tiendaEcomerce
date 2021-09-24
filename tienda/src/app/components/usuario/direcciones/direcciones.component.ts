@@ -29,6 +29,7 @@ export class DireccionesComponent implements OnInit {
   public regiones_arr : Array<any> = [];
   public provincias_arr : Array<any> = [];
   public distritos_arr : Array<any> = [];
+  public load_data = true;
 
   constructor(
     private _guestService: GuestService,
@@ -70,6 +71,7 @@ export class DireccionesComponent implements OnInit {
       response=>{
         //console.log(response);
         this.direcciones = response.data;
+        this.load_data = false;
       }
     )
   }

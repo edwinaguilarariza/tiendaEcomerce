@@ -123,8 +123,8 @@
                 </a> -->
               </div>
 
-            <div class="row">
-                <div class="col-12">
+            <div class="row" *ngIf="!load_data">
+                <div class="col-12" *ngIf="direcciones.length >=1 ">
                     <ng-container *ngFor="let item of direcciones">
                         <div class="card mb-3">
                             <div class="card-body">
@@ -153,11 +153,25 @@
                         </div>
                     </ng-container>
                 </div>
+                <div class="col-12" *ngIf="direcciones.length == 0">
+                    <h3 class="h6 mb-2 text-uppercase">No se encontraron direcciones</h3>
+                    <h2 class="h1 pb-lg-3" style="font-size:2rem !important">Debe registrar su direccion de envio por favor ...</h2>
+                </div>
+            </div>
+            <div class="row" *ngIf="load_data">
+                <div class="col_12 text-center">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                </div>
+
             </div>
         </div>
     </div>
     </section>
 </main>
+                   
+                    
 
 <app-footer></app-footer>
 
