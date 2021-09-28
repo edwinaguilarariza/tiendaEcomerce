@@ -15,9 +15,9 @@ declare var iziToast: any;
 export class NavComponent implements OnInit {
 
   public token;
-  public id : any;
+  public id;
   public user: any = undefined;
-  public user_lc : any = undefined;
+  public user_lc : any = undefined ;
   public config_global: any = {};
   public op_cart  = false;
   
@@ -47,9 +47,11 @@ export class NavComponent implements OnInit {
             
             this.user = response.data;
             
-            localStorage.setItem('user_data',JSON.stringify(this.user)); 
+             localStorage.setItem('user_data',JSON.stringify(this.user)); 
             if (localStorage.getItem('user_data')) {
-              this.user_lc = localStorage.getItem('user_data');
+            
+              this.user_lc = JSON.parse(localStorage.getItem('user_data') || '{}');
+             // this.user_lc = JSON.parse(localStorage.getItem('user_data') !); tambien funsiona asi
              
              this.obtener_carrito(); 
              }else{
